@@ -50,7 +50,7 @@ public class UserService {
 	}
 	
 	public PageResult<User> list(Map<String,Object> params,Page page,String ordery){
-		return userDao.getList(page.getStartIndex(), page.getEndIndex(), params, ordery);
+		return userDao.getList(page.getStartIndex(), page.getPageLength(), params, ordery);
 	}
 	
 	/**
