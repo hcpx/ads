@@ -1,0 +1,149 @@
+.c-header {
+	position: relative;
+}
+
+.c-header .picture {
+	float: left;
+	width: 110px;
+	height: 60px;
+	margin-right: 10px;
+}
+
+.c-header .title {
+	margin: 5px 170px 10px 0;
+	padding: 0;
+	line-height: 1.2;
+	font-size: 18px;
+	font-weight: bold;
+	word-break:break-all;
+}
+
+@media (max-width: 767px) {
+	.c-header .title {
+		margin-right: 10px;
+	}
+}
+
+
+.c-header .teachers {
+	color: #999;
+	font-size: 13px;
+}
+
+.c-header .teachers a {
+	margin-right: 10px;
+	color: #666;
+}
+
+.c-header .toolbar {
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	margin-top: -15px;
+}
+
+
+.list-group-panel {
+
+}
+
+.list-group-panel .list-group-heading {
+	color: #999;
+	/*border-bottom: 1px solid #ccc;*/
+	padding: 5px 0;
+	/*margin-bottom: 5px;*/
+}
+
+.list-group-panel .list-group {
+
+}
+
+.list-group-panel .list-group-item {
+	border: none;
+	border-radius: 0 0 !important;
+	color: #444;
+	border-left: 3px solid #fff;
+}
+
+.list-group-panel .list-group-item.active,
+.list-group-panel .list-group-item.active:hover {
+	background: #f3f3f3;
+	color: #428bca;
+	font-weight: bold;
+	border-left: 3px solid #428bca;
+	outline: 1px solid #FAFAFA;
+}
+
+.list-group-panel .list-group-item:hover {
+    border-left: 3px solid #eee;
+
+}
+
+
+#modules {
+  padding: 20px;
+  background: #eee;
+  margin-bottom: 20px;
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropzone {
+  z-index: 0;
+  /* padding: 5px;
+  background: #FFF;
+  min-height: 100px;
+  margin-bottom: 20px;
+  border-radius: 10px; */
+}
+
+.drop-item {
+  cursor: pointer;
+  margin-bottom: 5px;
+  background-color: rgb(255, 255, 255);
+  padding: 5px 10px;
+  border-radisu: 3px;
+  border: 1px solid rgb(204, 204, 204);
+  position: relative;
+}
+.drop-item .remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+.dropzone div {cursor: move;}
+.dropzone div .sort-handle {
+	color: #ccc;
+	display: inline-block;
+	float: left;
+	cursor: pointer;
+	margin-right: 5px;
+}
+
+.dropzone div .sort-handle:hover {
+	color: #666;
+}
+
+.dropzone div:hover .sort-handle {
+	visibility: visible;
+	color: #999;
+}
+
+.sortable-placeholder
+{
+    border: 1px dotted black;
+    visibility: visible !important;
+    height: 30px !important;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+}
+.sortable-placeholder *
+{
+    visibility: hidden;
+}
+
+.c_picture .picture {
+	float: left;
+	width: 100%;
+	height: auto;
+}

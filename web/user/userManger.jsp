@@ -19,6 +19,8 @@
 <link
 	href="${pageContext.request.contextPath }/css/bootstrap-datetimepicker.min.css"
 	rel="stylesheet">
+<link href="<%=path%>/common/css/global.css" rel="stylesheet" />
+<link href="<%=path%>/common/css/public.css" rel="stylesheet" />
 <script src="js/bootstrap/bootstrap.min.js"></script>
 <script
 	src="<%=basePath%>js/bootstrap/bootstrap-paginator.min.js"></script>
@@ -123,46 +125,20 @@ function addUser(){
 </head>
 
 <body class="index">
-	<div class="container">
+	<div class="container admin-container">
 		<!-- 顶部内容 -->
-		<div class="row row-12">
-			<div class="col-md-12">
-				<div class="panel panel-default  c-header">
-					<div class="panel-body clearfix">
-						<span class="text-info" style="font-size: 18px;">
-							bootstrap布局 <span class="label label-success">已发布</span> </span>
-						<button class="btn btn-success btn-sm pull-right">开始学习</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		<header class="navbar navbar-inverse navbar-fixed-top docs-nav"
+				role="banner">
+			<jsp:include page="/common/include/header_mge.jsp">
+				<jsp:param name="target" value="user" />
+			</jsp:include>
+		</header>
 
-		<div class="row">
-			<!-- 左侧菜单 -->
-			<div class="col-md-2">
-				<div class="panel-group list-group-panel">
-					<div class="panel panel-default">
-						<div class="panel-heading col-head">
-							<h4 class="panel-title">
-								<a class="collapse-a" data-toggle="collapse"
-									data-parent="#accordion" href="#collapseOne"> 菜单 </a>
-							</h4>
-						</div>
+		<!-- 左侧菜单 -->
+		<jsp:include page="/user/common_nav.jsp">
+			<jsp:param name="target" value="user" />
+		</jsp:include>
 
-						<div class="panel-collapse collapse in">
-							<div class="panel-body">
-								<div class="list-group">
-									<a href="javascript:void(0);" class="list-group-item active" onclick="loadPage(1)">人员</a> <a
-										href="demo2.html" class="list-group-item">demo2</a> <a
-										href="demo3.html" class="list-group-item">demo3</a> <a
-										href="#" class="list-group-item">demo4</a>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
 			<!-- 右侧内容 -->
 			<div id="well" class="col-md-10">
 				<div  class="well">

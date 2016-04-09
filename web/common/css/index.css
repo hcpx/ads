@@ -1,0 +1,16 @@
+/*! normalize.css v2.1.3 | MIT License | git.io/normalize */
+body {background-color: #EEE;}
+.modal-open {overflow: initial !important;}
+.navbar-default {background-color: #286A46;border-color: #235b3c;}
+.navbar-brand-index {float: left;padding: 12px 10px ;font-size: 20px;line-height: 21px;color:#FFF;}
+.navbar-brand-index:hover,
+.navbar-brand-index:focus{text-decoration: none;color:#FFF;}
+.navbar-brand-index img {width: 25px;height: 25px; vertical-align: bottom;}
+.splash {margin: 70px 0 0 0;height: 0;}
+.splash_bd {}
+.footer {height: 150px;background-color:#286A46;width: 100%;margin-top:100px;}
+/*
+background-color: #286A46;
+border-color: #235b3c;
+*/
+
