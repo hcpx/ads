@@ -17,6 +17,9 @@ public class User {
 	@Column(name = "c_id", nullable = false, length = 32)
 	private String id;
 	
+	/**
+	 * 用户姓名
+	 */
 	@Column(name = "c_name", nullable = true, length = 300)
 	private String name;
 	
