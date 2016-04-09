@@ -5,26 +5,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.edu.ads.bean.user.User;
+import com.edu.ads.controller.BaseController;
 import com.edu.ads.service.user.UserService;
 
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController extends BaseController{
 	
 	@Autowired
 	private UserService userService;
 	
 	@RequestMapping("/login.do")
 	public String login(HttpServletRequest request, HttpServletResponse response){
-		String userName = request.getParameter("username");
-		String password = request.getParameter("password");
-		System.out.println("userName :"+userName);
+		User userBean = new User();
+		getBean(userBean, request);
+		System.out.println("userName :"+userBean.getUserName());
 		try{
-			//登录成功后跳转到
-			if(userService.userExsist(userName, password)){
-				return "/user/getUserList.do";
+			User user  = userService.findUserByUserNameAndPwd(userBean.getUserName(), userBean.getPassword());
+			if(null==user){
+				
 			}
 		}catch(Exception e){
 			e.printStackTrace();

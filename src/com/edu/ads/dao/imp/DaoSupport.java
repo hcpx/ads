@@ -54,7 +54,6 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 	@Override
 	public void delete(T entity) {
 		getHibernateTemplate().delete(entity);
-		
 	}
 
 	@Override

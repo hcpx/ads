@@ -18,19 +18,19 @@ import com.edu.ads.bean.user.User;
 import com.edu.ads.common.page.Page;
 import com.edu.ads.common.page.PageResult;
 import com.edu.ads.common.utils.CommonUtils;
+import com.edu.ads.controller.BaseController;
 import com.edu.ads.service.user.UserService;
 
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
 
 	@Autowired
 	private UserService userService;
 	
 	@RequestMapping("/loadUserManger.do")
 	public String loadUserManger(){
-		
 		return "/user/userManger.jsp";
 	}
 	
@@ -47,8 +47,31 @@ public class UserController {
 		user.setPassword(password);
 		user.setUserName(userName);
 		user.setType(Integer.valueOf(userType));
+		//检测用户名是否存在
+		
+		
 		userService.addUser(user);
 		response.getWriter().write(0);
+	}
+	
+	
+	/**
+	 * 更新用户
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/updateUser.do")
+	public void updateUser(HttpServletRequest request, HttpServletResponse response){
+		User updateUser = new User();
+		getBean(updateUser, request);
+		User userDb = userService.findUser(updateUser.getId());
+		userDb.setPassword(updateUser.getPassword());
+		userService.updateUser(userDb);
+	}
+	
+	public void deleteUser (HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		userService.deleleUser(id);
 	}
 	
 	

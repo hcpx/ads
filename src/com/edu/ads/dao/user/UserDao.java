@@ -15,6 +15,7 @@ import com.edu.ads.dao.imp.DaoSupport;
 public class UserDao extends DaoSupport<User> {
 
 	
+	
 	public User getUser(String userName,String password){
 		 StringBuffer sql = new StringBuffer();
 		 sql.append(" from User where ");

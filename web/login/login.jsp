@@ -64,7 +64,7 @@
 							<form role="form" action="login/login.do" method="post" class="login-form">
 								<div class="form-group">
 									<label class="sr-only" for="form-username">Username</label>
-									 <input type="text" name="username" placeholder="Username..."
+									 <input type="text" name="userName" placeholder="Username..."
 										class="form-username form-control" id="form-username">
 								</div>
 								<div class="form-group">

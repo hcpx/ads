@@ -45,9 +45,22 @@ public class UserService {
 		return userDao.find(id);
 	}
 
+	public void deleleUser(String userId){
+		userDao.delete(findUser(userId));
+	}
 	
 	public PageResult<User> list(Map<String,Object> params,Page page,String ordery){
 		return userDao.getList(page.getStartIndex(), page.getEndIndex(), params, ordery);
+	}
+	
+	/**
+	 * 根据用户名密码查找用户
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public User findUserByUserNameAndPwd(String userName,String password){
+		return userDao.getUser(userName, password);
 	}
 	
 	/**
