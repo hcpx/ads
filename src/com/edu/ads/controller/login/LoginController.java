@@ -27,7 +27,12 @@ public class LoginController extends BaseController{
 		try{
 			User user  = userService.findUserByUserNameAndPwd(userBean.getUserName(), userBean.getPassword());
 			if(null==user){
-				
+				request.setAttribute("username", userBean.getUserName());
+				request.setAttribute("password",userBean.getPassword());
+				request.setAttribute("errormessage", "用户名密码错误");
+				return "/login/login.jsp";
+			}else{
+				return "/user/loadUserManger.do";
 			}
 		}catch(Exception e){
 			e.printStackTrace();

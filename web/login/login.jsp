@@ -65,12 +65,13 @@
 								<div class="form-group">
 									<label class="sr-only" for="form-username">Username</label>
 									 <input type="text" name="userName" placeholder="Username..."
-										class="form-username form-control" id="form-username">
+										class="form-username form-control" id="form-username" value="${username}">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-password">Password</label> <input
 										type="password" name="password" placeholder="Password..."
-										class="form-password form-control" id="form-password">
+										class="form-password form-control" id="form-password" value="${password}">
+										<label class="errorMessage" for="form-username" style="color:red;">${errormessage }</label>
 								</div>
 								<button type="submit" class="btn">Sign in!</button>
 							</form>
