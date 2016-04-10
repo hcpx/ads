@@ -54,7 +54,6 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 	@Override
 	public void delete(T entity) {
 		getHibernateTemplate().delete(entity);
-		
 	}
 
 	@Override
@@ -63,7 +62,7 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 		return getHibernateTemplate().find(sql).size();
 	}
 	
-	public PageResult<T> getList(int starIndex,int endIndex,Map<String,Object> params,String orderBy){
+	public PageResult<T> getList(int starIndex,int maxResult,Map<String,Object> params,String orderBy){
 		//创建查询sql
 		StringBuffer queryString = bulidHql(params, orderBy);
 		String entityName = buildEntityName();
@@ -72,12 +71,16 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 		try{
 			session = getHibernateSession();
 			Query query = session.createQuery(queryString.toString());
+			setParams(params, query);
 			query.setFirstResult(starIndex);
-			query.setMaxResults(endIndex);
+			query.setMaxResults(maxResult);
 			pageResult.setRecords(query.list());
 			String countSql ="select count(" + this.getCountField(this.entityClazz) + ") from " + entityName + " o "
 					+ bulidWhereSql(params);
-			pageResult.setTotalRecords(Integer.valueOf(getHibernateTemplate().find(countSql).get(0).toString()));
+			query = session.createQuery(countSql);
+			setParams(params, query);
+			List objs = query.list();
+			pageResult.setTotalRecords(Integer.valueOf(objs.get(0).toString()));
 			return pageResult;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -105,9 +108,19 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 			whereSql.append(" and ");
 			whereSql.append(entry.getKey());
 			whereSql.append("=");
-			whereSql.append(entry.getValue());
+			whereSql.append("?");
 		}
 		return whereSql.toString();
+	}
+	
+	private void setParams(Map<String,Object> params,Query query ){
+		Set<Entry<String, Object>> entrys =  params.entrySet();
+		int index = 0;
+		for(Entry<String, Object> entry:entrys){
+			query.setParameter(index, entry.getValue());
+			index++;
+		}
+		
 	}
 	
 	/**
