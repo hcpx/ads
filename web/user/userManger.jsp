@@ -25,6 +25,9 @@
 <script
 	src="<%=basePath%>js/bootstrap/bootstrap-paginator.min.js"></script>
 <script src="<%=basePath%>js/bootstrap/b3paginator.js"></script>
+<style type="text/css">
+   .errorInfo{color:red;display:none;}
+</style>
 <script type="text/javascript">
         var path='<%=basePath%>';
     $(document).ready(function(){
@@ -97,29 +100,73 @@ function loadUserAddPage(){
 }
 
 
-function addUser(){
-   var name = $("#name").val();
-   var userType = $("#userType").val();
-   var userName = $("#username").val();
-   var password = $("#password").val();
-   var data = {
-       name:name,
-       userType:userType,
-       userName:userName,
-       password:password
-   };
-   var url = path+"user/saveUser.do";
-   $.ajax({
-      type: 'POST',
+
+function checkUserNameExist(){
+    var userName = $("#username").val();
+     var url = path+"user/checkUserNameExsit.do";
+    var data={userName:userName}
+    var flag = true;
+    $.ajax({
+       type: 'POST',
+       async:false,
        url:url,
        data:data,
        success:function(res){
-       alert(res)
-           loadPage(1);
+       if(res=='0'){
+          $("#usernameInfo").show();
+          flag = false;
+       }else{
+          $("#usernameInfo").hide();
+       }
        }
    });
+   return flag;
 }
 
+function submitUserAdd(){
+    var name= $("#name").val();
+    if(name==null||name==""){
+       $("#nameInfo").show();
+       return;
+    }else{
+       $("#nameInfo").hide();
+    }
+    var userType=$("#userType").val();
+    if(userType==null||userType==""){
+       $("#typeInfo").show();
+       return;
+    }else{
+       $("#typeInfo").hide();
+    }
+    var userName = $("#username").val();
+    if(userName==null||userName==""){
+       $("#usernameInfo").show();
+       return;
+    }else{
+      $("#usernameInfo").hide();
+    }
+    var password = $("#password").val();
+    if(password==null||password==""){
+       $("#passwordInfo").show();
+       return;
+    }else{
+      $("#passwordInfo").hide();
+    }
+    if(!checkUserNameExist()){
+       return;
+    }
+    
+    $("#userAddForm").submit();
+}
+
+function showUser(id){
+   var url = path+"user/showUser.do";
+    $("#well").load(url,{id:id});
+}
+
+function reback(){
+   $("#loadManger").click();
+}
 
 </script>
 </head>

@@ -35,8 +35,7 @@
                 <div class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div class="list-group">
-                            <a href="<%=path %>/user/loadUserManger.do" class="list-group-item <%="user".equals(target) ? "active" : "" %>">人员</a>
-                            <a href="#" class="list-group-item">demo2</a>
+                            <a id="loadManger" href="<%=path %>/user/loadUserManger.do" class="list-group-item <%="user".equals(target) ? "active" : "" %>">人员</a>
                         </div>
                     </div>
                 </div>

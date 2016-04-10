@@ -77,6 +77,11 @@ public class UserService {
 		return true;
 	}
 	
+	public boolean userNameExist(String userName){
+		
+		return userDao.userNameExist(userName);
+	}
+	
 	public UserDao getUserDao() {
 		return userDao;
 	}
