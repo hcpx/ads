@@ -15,37 +15,65 @@ import com.edu.ads.bean.user.User;
 import com.edu.ads.common.page.Page;
 import com.edu.ads.common.page.PageResult;
 import com.edu.ads.common.utils.CommonUtils;
+import com.edu.ads.controller.BaseController;
 import com.edu.ads.service.user.UserService;
 
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
 
 	@Autowired
 	private UserService userService;
 	
+	
+	
+	
 	@RequestMapping("/loadUserManger.do")
 	public String loadUserManger(){
-		
 		return "/user/userManger.jsp";
 	}
 	
+	@RequestMapping("/checkUserNameExsit.do")
+	public void checkUserNameExsit(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String userName =  request.getParameter("userName");
+		if(userService.userNameExist(userName)){
+			response.getWriter().write("0");
+		}else{
+			response.getWriter().write("1");
+		}
+		response.getWriter().flush();
+	}
 	
 	@RequestMapping("/saveUser.do")
-	public void saveUser(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		String name =  request.getParameter("name");
-		String userName =  request.getParameter("userName");
-		String password =  request.getParameter("password");
-		String userType =  request.getParameter("userType");
+	public String saveUser(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		User user = new User();
+		getBean(user, request);
 		user.setId(CommonUtils.getUUid());
-		user.setName(name);
-		user.setPassword(password);
-		user.setUserName(userName);
-		user.setType(Integer.valueOf(userType));
 		userService.addUser(user);
-		response.getWriter().write(0);
+		return "/user/loadUserManger.do";
+	}
+	
+	
+	/**
+	 * 更新用户
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/updateUser.do")
+	public void updateUser(HttpServletRequest request, HttpServletResponse response){
+		User updateUser = new User();
+		getBean(updateUser, request);
+		User userDb = userService.findUser(updateUser.getId());
+		userDb.setPassword(updateUser.getPassword());
+		userService.updateUser(userDb);
+	}
+	
+	@RequestMapping("/deleteUser.do")
+	public String deleteUser (HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		userService.deleleUser(id);
+		return "/user/loadUserManger.do";
 	}
 	
 	
@@ -55,7 +83,6 @@ public class UserController {
 		String usertype = request.getParameter("usertype");
 	    String currentPage = request.getParameter("currentPage");
 	    String pageSize = request.getParameter("pageSize");
-	    
 	    Page page = bulidPage(currentPage, pageSize);
 		Map<String,Object> param = new HashMap<String,Object>();
 		if(name!=null&&!"".equals(name)){
@@ -88,6 +115,14 @@ public class UserController {
 	@RequestMapping("/loadUserAdd.do")
 	public String loadUserAdd(){
 		return "/user/adduse.jsp";
+	}
+	
+	@RequestMapping("/showUser.do")
+	public String showUser(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		User user = userService.findUser(id);
+		request.setAttribute("user",user);
+		return "/user/userShow.jsp";
 	}
 	
 }

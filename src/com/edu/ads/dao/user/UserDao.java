@@ -15,6 +15,21 @@ import com.edu.ads.dao.imp.DaoSupport;
 public class UserDao extends DaoSupport<User> {
 
 	
+	
+	/**
+	 * 用户名是否存在
+	 * @param userName
+	 * @return
+	 */
+	public boolean userNameExist(String userName){
+		String sql = "select count(c_username) from t_ry where c_username=?";
+		int count = getJdbcTemplate().queryForInt(sql, userName);
+		if(count>0){
+			return true;
+		}
+		return false;
+	}
+	
 	public User getUser(String userName,String password){
 		 StringBuffer sql = new StringBuffer();
 		 sql.append(" from User where ");
