@@ -123,7 +123,7 @@ function checkUserNameExist(){
    return flag;
 }
 
-function submitUserAdd(){
+function submitUserAdd(eleid,ischeck){
     var name= $("#name").val();
     if(name==null||name==""){
        $("#nameInfo").show();
@@ -152,11 +152,13 @@ function submitUserAdd(){
     }else{
       $("#passwordInfo").hide();
     }
-    if(!checkUserNameExist()){
-       return;
+    if(ischeck){
+	    if(!checkUserNameExist()){
+	       return;
+	    }
     }
     
-    $("#userAddForm").submit();
+    $("#"+eleid).submit();
 }
 
 function showUser(id){
@@ -167,6 +169,15 @@ function showUser(id){
 function reback(){
    $("#loadManger").click();
 }
+
+
+
+function updateUser(id){
+    var url = path+"user/getUpdateUser.do";
+    $("#well").load(url,{id:id});
+}
+
+
 
 </script>
 </head>
