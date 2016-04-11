@@ -22,13 +22,13 @@
 				<td>${user.name }</td>
 				<td>${user.userName }</td>
 				<td><c:if test="${user.type==1 }">
-                                                                            销售人员
+                                                                            管理员
                        </c:if> <c:if test="${user.type==2 }">
                                                                             销售人员
                        </c:if></td>
 				<td>
 				 <a href="javascript:void(0);" onclick="showUser('${user.id}')">查看</a>
-				 <a href="javascript:void(0);">编辑</a>
+				 <a href="javascript:void(0);" onclick="updateUser('${user.id}')">编辑</a>
 				 <a href="user/deleteUser.do?id=${user.id}">删除</a>
 				</td>
 			</tr>
@@ -49,4 +49,3 @@
 		<span class="page-list min-dply-none"></span>
 	</div>
 </div>
-

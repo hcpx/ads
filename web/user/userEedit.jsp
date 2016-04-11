@@ -1,11 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
+
 <div class="well">
-	<form method="post" class="form-horizontal" action="user/saveUser.do"
-		id="userAddForm">
+	<form method="post" class="form-horizontal" action="user/updateUser.do"
+		id="userUpdateForm">
 		<div class="modal-body">
 			<div class="row form-group">
 				<div class="col-md-2 control-label">
@@ -13,8 +17,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="col-md-4 controls">
 					<input type="text" class="form-control" id="name" name="name"
-						value="" placeholder="名称"> <label id="nameInfo"
-						class="errorInfo">*名称不能为空</label>
+						value="${user.name }"> <label id="nameInfo"
+						class="errorInfo">*名称不能为空</label> <input type="hidden" name="id"
+						value="${user.id }">
 				</div>
 
 				<div class="col-md-2 control-label">
@@ -23,8 +28,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-md-4 controls">
 					<div class="input-group">
 						<select class="form-control" id="userType" name="type">
-							<option value="1">管理员</option>
-							<option value="2">销售人员</option>
+							<option value="1"
+								<c:if test="${user.type==1}">
+								selected='selected'
+								</c:if>>管理员</option>
+							<option value="2"
+								<c:if test="${user.type==2}">selected='selected'</c:if>>销售人员</option>
 						</select> <label id="typeInfo" class="errorInfo">*用戶类型不能为空</label>
 					</div>
 				</div>
@@ -34,22 +43,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<label class="col-sm-2 control-label">用户名：</label>
 				<div class="col-md-4">
 					<input type="text" class="form-control" id="username"
-						name="userName" value="" placeholder="用户名"
-						onblur="checkUserNameExist()"> <label id="usernameInfo"
-						class="errorInfo">*用户名已存在</label>
+						name="userName" value="${user.userName }" readonly="readonly">
+					<label id="usernameInfo" class="errorInfo">*用户名已存在</label>
 				</div>
 
 				<label class="col-sm-2 control-label">密码：</label>
 				<div class="col-md-4">
 					<input type="password" class="form-control" id="password"
-						name="password" value="" placeholder="密码"> <label
+						name="password"  value="${user.password }"> <label
 						id="passwordInfo" class="errorInfo">*用户名已存在</label>
 				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button id="subnitBtn" class="btn btn-primary pull-left"
-				type="button" onclick="submitUserAdd('userAddForm',true)">提交</button>
+			<button id="updatesubnitBtn" class="btn btn-primary pull-left"
+				type="button" onclick="submitUserAdd('userUpdateForm',false)">提交</button>
 		</div>
 	</form>
 </div>

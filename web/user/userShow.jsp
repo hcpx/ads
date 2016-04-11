@@ -34,7 +34,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="row form-group">
 			<label class="col-sm-2 control-label">用户名：</label>
 			<div class="col-md-4">
 				<input type="text" class="form-control" value="${user.userName }"
@@ -53,4 +53,3 @@
 			onclick="reback()">返回</button>
 	</div>
 </div>
-
