@@ -61,12 +61,15 @@ public class UserController extends BaseController{
 	 * @param response
 	 */
 	@RequestMapping("/updateUser.do")
-	public void updateUser(HttpServletRequest request, HttpServletResponse response){
+	public String updateUser(HttpServletRequest request, HttpServletResponse response){
 		User updateUser = new User();
 		getBean(updateUser, request);
 		User userDb = userService.findUser(updateUser.getId());
+		userDb.setName(updateUser.getName());
+		userDb.setType(updateUser.getType());
 		userDb.setPassword(updateUser.getPassword());
 		userService.updateUser(userDb);
+		return "/user/loadUserManger.do";
 	}
 	
 	@RequestMapping("/deleteUser.do")
@@ -80,7 +83,7 @@ public class UserController extends BaseController{
 	@RequestMapping("/getUserList.do")
 	public String getUserList(HttpServletRequest request, HttpServletResponse response){
 		String name =request.getParameter("name");
-		String usertype = request.getParameter("usertype");
+		String usertype = request.getParameter("userType");
 	    String currentPage = request.getParameter("currentPage");
 	    String pageSize = request.getParameter("pageSize");
 	    Page page = bulidPage(currentPage, pageSize);
@@ -115,6 +118,14 @@ public class UserController extends BaseController{
 	@RequestMapping("/loadUserAdd.do")
 	public String loadUserAdd(){
 		return "/user/adduse.jsp";
+	}
+	
+	@RequestMapping("/getUpdateUser.do")
+	public String getUpdateUser(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		User user = userService.findUser(id);
+		request.setAttribute("user",user);
+		return "/user/userEedit.jsp";
 	}
 	
 	@RequestMapping("/showUser.do")
