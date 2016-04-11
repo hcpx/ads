@@ -22,11 +22,13 @@
 <link href="<%=path%>/common/css/global.css" rel="stylesheet" />
 <link href="<%=path%>/common/css/public.css" rel="stylesheet" />
 <script src="js/bootstrap/bootstrap.min.js"></script>
-<script
-	src="<%=basePath%>js/bootstrap/bootstrap-paginator.min.js"></script>
+<script src="<%=basePath%>js/bootstrap/bootstrap-paginator.min.js"></script>
 <script src="<%=basePath%>js/bootstrap/b3paginator.js"></script>
 <style type="text/css">
-   .errorInfo{color:red;display:none;}
+.errorInfo {
+	color: red;
+	display: none;
+}
 </style>
 <script type="text/javascript">
         var path='<%=basePath%>';
@@ -175,7 +177,7 @@ function reback(){
 	<div class="container admin-container">
 		<!-- 顶部内容 -->
 		<header class="navbar navbar-inverse navbar-fixed-top docs-nav"
-				role="banner">
+			role="banner">
 			<jsp:include page="/common/include/header_mge.jsp">
 				<jsp:param name="target" value="user" />
 			</jsp:include>
@@ -186,28 +188,28 @@ function reback(){
 			<jsp:param name="target" value="user" />
 		</jsp:include>
 
-			<!-- 右侧内容 -->
-			<div id="well" class="col-md-10">
-				<div  class="well">
-					<div class="form-inline well well-sm">
-						<div class="form-group">
-							<input id="name" type="text" class="form-control"
-								placeholder="请输入姓名">
-						</div>
-						<div class="form-group">
-							<select class="form-control" id="userType">
-								<option value="">人员类型</option>
-								<option value="1">管理员</option>
-								<option value="2">销售人员</option>
-							</select>
-						</div>
-						<span class="btn btn-primary" onclick="loadPage(1)">查询</span> 
-						<span class="btn btn-primary" onclick="loadUserAddPage()">添加</span>
+		<!-- 右侧内容 -->
+		<div id="well" class="col-md-10">
+			<div class="well">
+				<div class="form-inline well well-sm">
+					<div class="form-group">
+						<input id="name" type="text" class="form-control"
+							placeholder="请输入姓名">
 					</div>
+					<div class="form-group">
+						<select class="form-control" id="userType">
+							<option value="">人员类型</option>
+							<option value="1">管理员</option>
+							<option value="2">销售人员</option>
+						</select>
+					</div>
+					<span class="btn btn-primary" onclick="loadPage(1)">查询</span> <span
+						class="btn btn-primary" onclick="loadUserAddPage()">添加</span>
 				</div>
-				<div id="content"></div>
 			</div>
+			<div id="content"></div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

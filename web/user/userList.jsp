@@ -47,6 +47,6 @@
 	<div class="pagination-main">
 		<ul id="pagination" class="pagination"></ul>
 		<span class="page-list min-dply-none"></span>
-	</div
+	</div>
 </div>
 
