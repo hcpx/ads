@@ -13,6 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.edu.ads.common.utils.ConfigUtil;
+
+
 @Controller
 @RequestMapping("file")
 public class AdvertisingController {
@@ -48,7 +51,7 @@ public class AdvertisingController {
 						String fileName = "demoUpload"
 								+ file.getOriginalFilename();
 						// 定义上传路径
-						String path = "D://work/soft/myeclipse10/apache-tomcat-6.0.35/webapps/ads/images/"
+						String path = ConfigUtil.getString("SOFT_ANDROID_FILENAME")
 								+ fileName;
 						File localFile = new File(path);
 						file.transferTo(localFile);
