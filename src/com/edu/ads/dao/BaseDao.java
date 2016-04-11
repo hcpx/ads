@@ -1,12 +1,5 @@
 package com.edu.ads.dao;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-
-import com.edu.ads.common.page.PageResult;
-
-
 public interface BaseDao <T> {
 
 	public T find(String id);

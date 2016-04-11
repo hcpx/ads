@@ -2,7 +2,6 @@ package com.edu.ads.dao.imp;
 
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -16,12 +15,7 @@ import javax.persistence.Entity;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
-import com.edu.ads.bean.user.User;
 import com.edu.ads.common.page.PageResult;
 import com.edu.ads.dao.BaseDao;
 
