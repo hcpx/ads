@@ -33,19 +33,35 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label">用户名：</label>
+				<label class="col-sm-2 control-label">开始时间：</label>
 				<div class="col-md-4">
 					<input type="text" class="form-control" id="username"
 						name="userName" value="" placeholder="用户名"
 						onblur="checkUserNameExist()"> <label id="usernameInfo"
-						class="errorInfo">*用户名已存在</label>
+						class="errorInfo">*开始时间不能为空</label>
 				</div>
 
-				<label class="col-sm-2 control-label">密码：</label>
+				<label class="col-sm-2 control-label">结束时间：</label>
 				<div class="col-md-4">
 					<input type="password" class="form-control" id="password"
 						name="password" value="" placeholder="密码"> <label
-						id="passwordInfo" class="errorInfo">*用户名已存在</label>
+						id="passwordInfo" class="errorInfo">*结束时间</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">订单总价：</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" id="username"
+						name="userName" value="" placeholder="用户名"
+						onblur="checkUserNameExist()"> <label id="usernameInfo"
+						class="errorInfo">*开始时间不能为空</label>
+				</div>
+
+				<label class="col-sm-2 control-label">结束时间：</label>
+				<div class="col-md-4">
+					<input type="password" class="form-control" id="password"
+						name="password" value="" placeholder="密码"> <label
+						id="passwordInfo" class="errorInfo">*结束时间</label>
 				</div>
 			</div>
 		</div>
