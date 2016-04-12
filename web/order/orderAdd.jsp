@@ -15,7 +15,7 @@
 					<label>客户联系人：</label>
 				</div>
 				<div class="col-md-4 controls">
-					<input type="text" class="form-control" id="customerName" name="customerName"
+					<input type="text" class="form-control" id="khlxr" name="khlxr"
 						value="" placeholder="名称"> 
 						<label id="nameInfo"
 						class="errorInfo">*联系人不能空</label>
@@ -25,7 +25,7 @@
 					<label>联系人电话：</label>
 				</div>
 				<div class="col-md-4 controls">
-					<input type="text" class="form-control" id="customerPhone" name="customerPhone"
+					<input type="text" class="form-control" id="khlxrdh" name="khlxrdh"
 						value="" placeholder="名称"> 
 						<label id="nameInfo"
 						class="errorInfo">*电话不能空</label>
@@ -35,33 +35,47 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">开始时间：</label>
 				<div class="col-md-4">
-					<input type="text" class="form-control" id="username"
-						name="userName" value="" placeholder="用户名"
+					<input type="text" class="form-control" id="kssj"
+						name="kssj" value="" placeholder="用户名"
 						onblur="checkUserNameExist()"> <label id="usernameInfo"
 						class="errorInfo">*开始时间不能为空</label>
 				</div>
 
 				<label class="col-sm-2 control-label">结束时间：</label>
 				<div class="col-md-4">
-					<input type="password" class="form-control" id="password"
-						name="password" value="" placeholder="密码"> <label
+					<input type="jssj" class="form-control" id="password"
+						name="jssj" value="" placeholder="密码"> <label
 						id="passwordInfo" class="errorInfo">*结束时间</label>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">订单总价：</label>
 				<div class="col-md-4">
-					<input type="text" class="form-control" id="username"
-						name="userName" value="" placeholder="用户名"
-						onblur="checkUserNameExist()"> <label id="usernameInfo"
-						class="errorInfo">*开始时间不能为空</label>
+					<input type="text" class="form-control" id="count"
+						name="count" value="" placeholder="用户名"
+						onblur="checkUserNameExist()"> 
 				</div>
 
-				<label class="col-sm-2 control-label">结束时间：</label>
+				<label class="col-sm-2 control-label">销售人员：</label>
 				<div class="col-md-4">
-					<input type="password" class="form-control" id="password"
-						name="password" value="" placeholder="密码"> <label
-						id="passwordInfo" class="errorInfo">*结束时间</label>
+					<input type="password" class="form-control" id="xsry"
+						name="xsry" value="" placeholder="密码"> <label
+						id="xsryInfo" class="errorInfo">*请选择销售人员</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">订单总价：</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" id="count"
+						name="count" value="" placeholder="用户名"
+						onblur="checkUserNameExist()"> 
+				</div>
+
+				<label class="col-sm-2 control-label">销售人员：</label>
+				<div class="col-md-4">
+					<input type="password" class="form-control" id="xsry"
+						name="xsry" value="" placeholder="密码"> <label
+						id="xsryInfo" class="errorInfo">*请选择销售人员</label>
 				</div>
 			</div>
 		</div>

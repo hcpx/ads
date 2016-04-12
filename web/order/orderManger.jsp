@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -6,12 +6,13 @@
 			+ path + "/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<!DOCTYPE html>
 <html>
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'orderManger.jsp' starting page</title>
+<title></title>
 
 <script src="js/jquery/jquery-1.11.1.min.js"></script>
 <link href="${pageContext.request.contextPath }/css/bootstrap.min.css"
@@ -28,6 +29,40 @@
 </head>
 
 <body>
-	
+	<div class="container admin-container">
+	<!-- 顶部内容 -->
+		<header class="navbar navbar-inverse navbar-fixed-top docs-nav"
+				role="banner">
+			<jsp:include page="/common/include/header_mge.jsp">
+				<jsp:param name="target" value="order" />
+			</jsp:include>
+		</header>
+	 <!-- 左侧菜单 -->
+		<jsp:include page="/order/common_nav.jsp">
+			<jsp:param name="target" value="order" />
+		</jsp:include>
+		
+		<!-- 右侧内容 -->
+			<div id="well" class="col-md-10">
+				<div  class="">
+					<div id="data_header" class="page-header clearfix" style="margin: 0px 0 20px">
+						<h1 class="pull-left">订单管理</h1>
+					</div>
+					<div class="form-inline well well-sm">
+						<div class="form-group">
+							<input id="name" type="text" class="form-control"
+								placeholder="销售人员名称">
+						</div>
+						<div class="form-group">
+						
+						</div>
+						<span class="btn btn-primary" onclick="loadPage(1)">查询</span> 
+						<span class="btn btn-primary" onclick="loadUserAddPage()">添加</span>
+					</div>
+				</div>
+				<div id="content"></div>
+			</div>
+		
+	</div>
 </body>
 </html>
