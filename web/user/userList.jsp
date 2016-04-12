@@ -27,9 +27,19 @@
                                                                             销售人员
                        </c:if></td>
 				<td>
-				 <a href="javascript:void(0);" onclick="showUser('${user.id}')">查看</a>
-				 <a href="javascript:void(0);" onclick="updateUser('${user.id}')">编辑</a>
-				 <a href="user/deleteUser.do?id=${user.id}">删除</a>
+				 <%--<a href="javascript:void(0);" onclick="showUser('${user.id}')">查看</a>--%>
+				<%-- <a href="javascript:void(0);" onclick="updateUser('${user.id}')">编辑</a>
+				 <a href="user/deleteUser.do?id=${user.id}">删除</a>--%>
+					 <div class="btn-group">
+						 <button type="button" class="btn btn-default btn-sm" onclick="updateUser('${user.id}')">编辑</button>
+						 <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							 <span class="caret"></span>
+							 <span class="sr-only">Toggle Dropdown</span>
+						 </button>
+						 <ul class="dropdown-menu">
+							 <li><a href="user/deleteUser.do?id=${user.id}"><span class="glyphicon glyphicon-ok"></span> 删除</a></li>
+						 </ul>
+					 </div>
 				</td>
 			</tr>
 		</c:forEach>

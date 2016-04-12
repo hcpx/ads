@@ -32,6 +32,10 @@
         var path='<%=basePath%>';
     $(document).ready(function(){
 	   loadPage(1);
+
+		$("#modal").on("hidden.bs.modal hide.bs.modal", function(e) {
+			$(this).removeData("bs.modal");
+		});
     });
 
 	function loadPage(page) {
@@ -45,7 +49,7 @@
 	
 	function getParam(currentPage){
 	    var curp = 1;
-	    var pageSize=2;
+	    var pageSize=5;
 	    var userName = $("#name").val();
 		var userType = $("#userType").val();
 		if(userType==null||userType==""){
@@ -73,7 +77,7 @@
 function initB3paginator(){
 	var data = getParam();
 	//基本分页
-	b3Paginator('pagination', 10, data['currentPage'], data['pageSize'], data['totPage'], 
+	b3Paginator('pagination', 5, data['currentPage'], data['pageSize'], data['totPage'],
 		function(event, originalEvent, type, page){
         	var goPage = 1;
         	if(type == "first") goPage = 1;
@@ -82,15 +86,14 @@ function initB3paginator(){
         	else if(type == "last") goPage = data['totPage'];
         	else if(type == "page") goPage = page;
         	//页面跳转方法自行定义
-        	loadPage(goPage);
+			loadPrList(goPage);
     	}, function (type, page, current) {
         	return null;
     });
 	$(".page-list").b3paginatorext({
     	onPageSizeChange:function(){loadPrList(1);},
     	pagesizeinput:"#pageSize",
-    	pagesize:data['pageSize'],
-    	totcount:data['totPage']
+    	pagesize:data['pageSize']
 		});
 }
 
@@ -162,8 +165,11 @@ function submitUserAdd(eleid,ischeck){
 }
 
 function showUser(id){
-   var url = path+"user/showUser.do";
-    $("#well").load(url,{id:id});
+ /*  var url = path+"user/showUser.do";
+    $("#well").load(url,{id:id});*/
+	var remote_url = path+"user/showUser.do?id="+id;
+	$("#modal").modal({ backdrop: 'static', keyboard: false, show:true, remote: remote_url });
+	$("#modal").modal("show");
 }
 
 function reback(){
@@ -173,8 +179,11 @@ function reback(){
 
 
 function updateUser(id){
-    var url = path+"user/getUpdateUser.do";
-    $("#well").load(url,{id:id});
+   /* var url = path+"user/getUpdateUser.do";
+    $("#well").load(url,{id:id});*/
+	var remote_url = path+"user/getUpdateUser.do?id="+id;
+	$("#modal").modal({ backdrop: 'static', keyboard: false, show:true, remote: remote_url });
+	$("#modal").modal("show");
 }
 
 
@@ -199,7 +208,10 @@ function updateUser(id){
 
 			<!-- 右侧内容 -->
 			<div id="well" class="col-md-10">
-				<div  class="well">
+				<div  class="">
+					<div id="data_header" class="page-header clearfix" style="margin: 0px 0 20px">
+						<h1 class="pull-left">人员管理</h1>
+					</div>
 					<div class="form-inline well well-sm">
 						<div class="form-group">
 							<input id="name" type="text" class="form-control"
@@ -217,6 +229,27 @@ function updateUser(id){
 					</div>
 				</div>
 				<div id="content"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- modal -->
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="modalcontent">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="loading">
+						<img src="<%=path%>/common/images/loading.gif" /> &nbsp;
+						正在努力地加载数据中，请稍候……
+					</div>
+				</div>
+				<div class="modal-footer"></div>
 			</div>
 		</div>
 	</div>
