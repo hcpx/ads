@@ -86,12 +86,12 @@ function initB3paginator(){
         	else if(type == "last") goPage = data['totPage'];
         	else if(type == "page") goPage = page;
         	//页面跳转方法自行定义
-			loadPrList(goPage);
+			loadPage(goPage);
     	}, function (type, page, current) {
         	return null;
     });
 	$(".page-list").b3paginatorext({
-    	onPageSizeChange:function(){loadPrList(1);},
+    	onPageSizeChange:function(){loadPage(1);},
     	pagesizeinput:"#pageSize",
     	pagesize:data['pageSize']
 		});
