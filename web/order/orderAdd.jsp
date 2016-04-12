@@ -1,32 +1,34 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
+
 <div class="well">
 	<form method="post" class="form-horizontal" action="user/saveUser.do"
-		id="userAddForm">
+		id="orderAddForm">
 		<div class="modal-body">
 			<div class="row form-group">
 				<div class="col-md-2 control-label">
-					<label>姓名：</label>
+					<label>客户联系人：</label>
 				</div>
 				<div class="col-md-4 controls">
-					<input type="text" class="form-control" id="name" name="name"
-						value="" placeholder="名称"> <label id="nameInfo"
-						class="errorInfo">*名称不能为空</label>
+					<input type="text" class="form-control" id="customerName" name="customerName"
+						value="" placeholder="名称"> 
+						<label id="nameInfo"
+						class="errorInfo">*联系人不能空</label>
 				</div>
 
 				<div class="col-md-2 control-label">
-					<label>人员类型</label>
+					<label>联系人电话：</label>
 				</div>
 				<div class="col-md-4 controls">
-					<div class="input-group">
-						<select class="form-control" id="userType" name="type">
-							<option value="1">管理员</option>
-							<option value="2">销售人员</option>
-						</select> <label id="typeInfo" class="errorInfo">*用戶类型不能为空</label>
-					</div>
+					<input type="text" class="form-control" id="customerPhone" name="customerPhone"
+						value="" placeholder="名称"> 
+						<label id="nameInfo"
+						class="errorInfo">*电话不能空</label>
 				</div>
 			</div>
 
@@ -53,3 +55,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</form>
 </div>
+
