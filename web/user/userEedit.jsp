@@ -64,6 +64,8 @@
 		</div>
 	</form>
 	<div class="modal-footer">
+		<button id="updatesubnitBtn" class="btn btn-primary pull-right"
+				type="button" onclick="submitUserAdd('userUpdateForm',false)">提交</button>
 		<button data-dismiss="modal" class="btn btn-link pull-right" type="button">取消</button>
 	</div>
 </div>
