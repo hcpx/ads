@@ -70,6 +70,8 @@ xmlns:aop="http://www.springframework.org/schema/aop" >
 		<property name="annotatedClasses">
 			<list>
 				<value>com.edu.ads.bean.ggp.GgpType</value>
+				<value>com.edu.ads.bean.ggp.Ggptp</value>
+				<value>com.edu.ads.bean.ggp.Ggp</value>
 				<value>com.edu.ads.bean.user.User</value>
 			</list>
 		</property>
