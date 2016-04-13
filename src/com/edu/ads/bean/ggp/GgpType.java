@@ -1,26 +1,32 @@
 package com.edu.ads.bean.ggp;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name="t_ggplx")
 @Entity
 public class GgpType {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "c_id", nullable = false, length = 32)
 	private String id;
 	
-	@Column(name = "c_mc", nullable = true, length = 300)
-	private String name;
+	@Column(name = "C_MC", nullable = true, length = 300)
+	private String mc;
 	
-	@Column(name = "c_ms", nullable = true, length = 300)
-	private String discription;
+	@Column(name = "C_MS", nullable = false, length = 900)
+	private String ms;
+	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="lx")
+	private Set<Ggp> ggps;
 
 	public String getId() {
 		return id;
@@ -30,22 +36,27 @@ public class GgpType {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Set<Ggp> getGgps() {
+		return ggps;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setGgps(Set<Ggp> ggps) {
+		this.ggps = ggps;
 	}
 
-	public String getDiscription() {
-		return discription;
+	public String getMs() {
+		return ms;
 	}
 
-	public void setDiscription(String discription) {
-		this.discription = discription;
+	public void setMs(String ms) {
+		this.ms = ms;
 	}
-	
-	
-	
+
+	public String getMc() {
+		return mc;
+	}
+
+	public void setMc(String mc) {
+		this.mc = mc;
+	}
 }

@@ -23,7 +23,7 @@ public class Ggp {
 	
 	@ManyToOne(cascade={CascadeType.ALL})           
     @JoinColumn(name="ggplx_id") 
-	private Ggplx lx;
+	private GgpType lx;
 	
 	@Column(name = "c_ms", nullable = true, length = 900)
 	private String ms;
@@ -48,12 +48,11 @@ public class Ggp {
 		this.id = id;
 	}
 
-
-	public Ggplx getLx() {
+	public GgpType getLx() {
 		return lx;
 	}
 
-	public void setLx(Ggplx lx) {
+	public void setLx(GgpType lx) {
 		this.lx = lx;
 	}
 
