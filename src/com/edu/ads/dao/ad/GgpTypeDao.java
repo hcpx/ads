@@ -6,5 +6,5 @@ import com.edu.ads.bean.ggp.GgpType;
 import com.edu.ads.dao.imp.DaoSupport;
 @Repository
 public class GgpTypeDao extends DaoSupport<GgpType>{
-
+	
 }

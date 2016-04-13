@@ -1,5 +1,6 @@
 package com.edu.ads.controller.ad;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.edu.ads.bean.ggp.GgpType;
 import com.edu.ads.common.page.Page;
 import com.edu.ads.common.page.PageResult;
+import com.edu.ads.common.utils.CommonUtils;
+import com.edu.ads.controller.BaseController;
 import com.edu.ads.service.ad.AdService;
 
 @Controller
 @RequestMapping("/ggp")
-public class GgpController {
+public class GgpController extends BaseController{
 	@Autowired
 	private AdService adService;
 	
@@ -54,5 +57,14 @@ public class GgpController {
 	@RequestMapping("/loadGgpTypeAdd.do")
 	public String loadUserAdd(){
 		return "/ad/addGgpType.jsp";
+	}
+	
+	@RequestMapping("/saveGgpType.do")
+	public String saveUser(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		GgpType ggpType = new GgpType();
+		getBean(ggpType, request);
+		ggpType.setId(CommonUtils.getUUid());
+		adService.addggpType(ggpType);
+		return "/ggp/loadGgpManger.do";
 	}
 }
