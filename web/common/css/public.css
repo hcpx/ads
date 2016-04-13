@@ -168,7 +168,7 @@ textarea {resize: none;}
 .of-auto {overflow: auto;} 
 .bg100 {filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; -moz-background-size:100% 100%; background-size:100% 100%; }
 .form-control {padding:0;padding-left:2px;}
-
+ .errorInfo{color:red;display:none;}
 @media (max-width: 500px) {
 	.col-lft15 {padding-left:15px;}
 }
