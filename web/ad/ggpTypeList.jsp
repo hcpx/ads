@@ -23,7 +23,7 @@
 				<td>
 				<div class="btn-group">
 					<button type="button" class="btn btn-default btn-sm"
-						onclick="updateUser('${ggptype.id}')">编辑</button>
+						onclick="updateGgpType('${ggptype.id}')">编辑</button>
 					<button type="button"
 						class="btn btn-default btn-sm dropdown-toggle"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -31,7 +31,7 @@
 							Dropdown</span>
 					</button>
 					<ul class="dropdown-menu">
-						<li><a href="user/deleteUser.do?id=${user.id}"><span
+						<li><a href="ad/deleteGgpType.do?id=${ggptype.id}"><span
 								class="glyphicon glyphicon-ok"></span> 删除</a>
 						</li>
 					</ul>

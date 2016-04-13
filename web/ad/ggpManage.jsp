@@ -47,7 +47,7 @@
 	function getParam(currentPage){
 	    var curp = 1;
 	    var pageSize=5;
-	    var userName = $("#name").val();
+	    var mc = $("#mc").val();
 		var userType = $("#userType").val();
 		if(userType==null||userType==""){
 		userType =1;
@@ -62,8 +62,7 @@
 		   curp = $("#curPage").val();
 		}
 		var data = {
-		   name:userName,
-		   userType:userType,
+		   mc:mc,
 		   currentPage:curp,
 		   pageSize:pageSize,
 		   totPage:totPage
@@ -94,33 +93,9 @@ function initB3paginator(){
 		});
 }
 
-function loadUserAddPage(){
-   var url = path+"user/loadUserAdd.do";
+function loadGgpTypeAddPage(){
+   var url = path+"ad/loadGgpTypeAdd.do";
    $("#well").load(url);
-}
-
-
-
-function checkUserNameExist(){
-    var userName = $("#username").val();
-     var url = path+"user/checkUserNameExsit.do";
-    var data={userName:userName}
-    var flag = true;
-    $.ajax({
-       type: 'POST',
-       async:false,
-       url:url,
-       data:data,
-       success:function(res){
-       if(res=='0'){
-          $("#usernameInfo").show();
-          flag = false;
-       }else{
-          $("#usernameInfo").hide();
-       }
-       }
-   });
-   return flag;
 }
 
 function submitUserAdd(eleid,ischeck){
@@ -171,8 +146,8 @@ function reback(){
    $("#loadManger").click();
 }
 
-function updateUser(id){
-	var remote_url = path+"user/getUpdateUser.do?id="+id;
+function updateGgpType(id){
+	var remote_url = path+"ad/updateGgpType.do?id="+id;
 	$("#modal").modal({ backdrop: 'static', keyboard: false, show:true, remote: remote_url });
 	$("#modal").modal("show");
 }
@@ -213,7 +188,7 @@ function updateUser(id){
 							</select>
 						</div>
 						<span class="btn btn-primary" onclick="loadPage(1)">查询</span> 
-						<span class="btn btn-primary" onclick="loadUserAddPage()">添加</span>
+						<span class="btn btn-primary" onclick="loadGgpTypeAddPage()">添加</span>
 					</div>
 				</div>
 				<div id="content"></div>

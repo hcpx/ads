@@ -50,4 +50,9 @@ public class GgpController {
 	private Page bulidPage(String currentPage,String pageSize){
 		return  new Page(Integer.valueOf(currentPage),Integer.valueOf(pageSize));
 	}
+	
+	@RequestMapping("/loadGgpTypeAdd.do")
+	public String loadUserAdd(){
+		return "/ad/addGgpType.jsp";
+	}
 }
