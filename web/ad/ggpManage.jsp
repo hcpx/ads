@@ -116,8 +116,26 @@ function submitGgpTypeAdd(eleid,ischeck){
     $("#"+eleid).submit();
 }
 
-function showUser(id){
-	var remote_url = path+"user/showUser.do?id="+id;
+function submitGgpUpdate(eleid,ischeck){
+    var mc= $("#mc").val();
+    if(mc==null||mc==""){
+       $("#mcInfo").show();
+       return;
+    }else{
+       $("#mcInfo").hide();
+    }
+    var ms=$("#ms").val();
+    if(ms==null||ms==""){
+       $("#msInfo").show();
+       return;
+    }else{
+       $("#msInfo").hide();
+    }
+    $("#"+eleid).submit();
+}
+
+function showGgpType(id){
+	var remote_url = path+"ggp/showGgpType.do?id="+id;
 	$("#modal").modal({ backdrop: 'static', keyboard: false, show:true, remote: remote_url });
 	$("#modal").modal("show");
 }
@@ -127,7 +145,7 @@ function reback(){
 }
 
 function updateGgpType(id){
-	var remote_url = path+"ad/updateGgpType.do?id="+id;
+	var remote_url = path+"ggp/updateGgpType.do?id="+id;
 	$("#modal").modal({ backdrop: 'static', keyboard: false, show:true, remote: remote_url });
 	$("#modal").modal("show");
 }
@@ -146,7 +164,7 @@ function updateGgpType(id){
 
 		<!-- 左侧菜单 -->
 		<jsp:include page="/ad/common_nav.jsp">
-			<jsp:param name="target" value="user" />
+			<jsp:param name="target" value="ggplx" />
 		</jsp:include>
 
 			<!-- 右侧内容 -->

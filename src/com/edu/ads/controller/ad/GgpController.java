@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.edu.ads.bean.ggp.GgpType;
 import com.edu.ads.common.page.Page;
 import com.edu.ads.common.page.PageResult;
@@ -25,12 +24,12 @@ public class GgpController extends BaseController{
 	private AdService adService;
 	
 	@RequestMapping("/loadGgpManger.do")
-	public String loadUserManger(){
+	public String loadGgpManger(){
 		return "/ad/ggpManage.jsp";
 	}
 	
 	@RequestMapping("/getGgTypeList.do")
-	public String getUserList(HttpServletRequest request, HttpServletResponse response){
+	public String getGgTypeList(HttpServletRequest request, HttpServletResponse response){
 		String title =request.getParameter("title");
 	    String currentPage = request.getParameter("currentPage");
 	    String pageSize = request.getParameter("pageSize");
@@ -55,16 +54,36 @@ public class GgpController extends BaseController{
 	}
 	
 	@RequestMapping("/loadGgpTypeAdd.do")
-	public String loadUserAdd(){
+	public String loadGgpTypeAdd(){
 		return "/ad/addGgpType.jsp";
 	}
 	
 	@RequestMapping("/saveGgpType.do")
-	public String saveUser(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	public String saveGgpType(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		GgpType ggpType = new GgpType();
 		getBean(ggpType, request);
 		ggpType.setId(CommonUtils.getUUid());
 		adService.addggpType(ggpType);
 		return "/ggp/loadGgpManger.do";
+	}
+	
+	@RequestMapping("/updateGgpType.do")
+	public String updateGgpType(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		String mc = request.getParameter("mc");
+		String ms = request.getParameter("ms");
+		GgpType ggpType = adService.findggpType(id);
+		ggpType.setMc(mc);
+		ggpType.setMs(ms);
+		adService.updateGgp(ggpType);
+		return "/ggp/loadGgpManger.do";
+	}
+	
+	@RequestMapping("/showGgpType.do")
+	public String showGgpType(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		GgpType ggpType = adService.findggpType(id);
+		request.setAttribute("ggpType",ggpType);
+		return "/ad/ggpTypeEedit.jsp";
 	}
 }

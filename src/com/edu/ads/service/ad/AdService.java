@@ -25,4 +25,22 @@ public class AdService {
 	public void addggpType(GgpType ggpType){
 		ggpTypeDao.save(ggpType);
 	}
+	
+	/**
+	 * 更新广告类型
+	 * @param id
+	 * @return User
+	 */
+	public void updateGgp(GgpType ggpType){
+		ggpTypeDao.update(ggpType);
+	}
+	
+	/**
+	 * 查找广告类型
+	 * @param id
+	 * @return User
+	 */
+	public GgpType findggpType(String id){
+		return ggpTypeDao.find(id);
+	}
 }
