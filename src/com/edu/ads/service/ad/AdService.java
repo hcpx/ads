@@ -43,4 +43,13 @@ public class AdService {
 	public GgpType findggpType(String id){
 		return ggpTypeDao.find(id);
 	}
+	
+	/**
+	 * 查找广告类型
+	 * @param id
+	 * @return User
+	 */
+	public void delete(GgpType ggpType) {
+		ggpTypeDao.delete(ggpType);
+	}
 }

@@ -30,13 +30,13 @@ public class GgpController extends BaseController{
 	
 	@RequestMapping("/getGgTypeList.do")
 	public String getGgTypeList(HttpServletRequest request, HttpServletResponse response){
-		String title =request.getParameter("title");
+		String mc =request.getParameter("mc");
 	    String currentPage = request.getParameter("currentPage");
 	    String pageSize = request.getParameter("pageSize");
 	    Page page = bulidPage(currentPage, pageSize);
 		Map<String,Object> param = new HashMap<String,Object>();
-		if(title!=null&&!"".equals(title)){
-			param.put("mc", title);
+		if(mc!=null&&!"".equals(mc)){
+			param.put("mc", mc);
 		}
 		String ordery = " order by mc desc";
 		PageResult<GgpType> pageResult = adService.ggTypeList(param, page, ordery);
@@ -85,5 +85,13 @@ public class GgpController extends BaseController{
 		GgpType ggpType = adService.findggpType(id);
 		request.setAttribute("ggpType",ggpType);
 		return "/ad/ggpTypeEedit.jsp";
+	}
+	
+	@RequestMapping("/deleteGgpType.do")
+	public String deleteGgpType(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		GgpType ggpType = adService.findggpType(id);
+		adService.delete(ggpType);
+		return "/ggp/loadGgpManger.do";
 	}
 }

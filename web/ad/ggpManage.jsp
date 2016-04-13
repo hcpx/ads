@@ -175,7 +175,7 @@ function updateGgpType(id){
 					</div>
 					<div class="form-inline well well-sm">
 						<div class="form-group">
-							<input id="name" type="text" class="form-control"
+							<input id="mc" type="text" class="form-control"
 								placeholder="请输入广告类型名">
 						</div>
 						<span class="btn btn-primary" onclick="loadPage(1)">查询</span> 
