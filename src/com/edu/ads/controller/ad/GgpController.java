@@ -23,8 +23,10 @@ public class GgpController extends BaseController{
 	@Autowired
 	private AdService adService;
 	
+	
+	/*广告牌类型controller*/
 	@RequestMapping("/loadGgpTypeManger.do")
-	public String loadGgpManger(){
+	public String loadGgpTypeManger(){
 		return "/ad/ggpTypeManage.jsp";
 	}
 	
@@ -93,5 +95,32 @@ public class GgpController extends BaseController{
 		GgpType ggpType = adService.findggpType(id);
 		adService.delete(ggpType);
 		return "/ggp/loadGgpTypeManger.do";
+	}
+	
+	/*广告牌controller*/
+	@RequestMapping("/loadGgpManger.do")
+	public String loadGgpManger(){
+		return "/ad/ggpManage.jsp";
+	}
+	
+	@RequestMapping("/getGgpList.do")
+	public String getGgpList(HttpServletRequest request, HttpServletResponse response){
+		String mc =request.getParameter("mc");
+	    String currentPage = request.getParameter("currentPage");
+	    String pageSize = request.getParameter("pageSize");
+	    Page page = bulidPage(currentPage, pageSize);
+		Map<String,Object> param = new HashMap<String,Object>();
+		if(mc!=null&&!"".equals(mc)){
+			param.put("mc", mc);
+		}
+		String ordery = " order by mc desc";
+		PageResult<GgpType> pageResult = adService.ggTypeList(param, page, ordery);
+		double totalCount =pageResult.getTotalRecords();
+		double perPageSize = Integer.valueOf(pageSize);
+		double pageSzie = Math.ceil(totalCount/perPageSize);
+		pageResult.setTotPage((int)pageSzie);
+		pageResult.setPage(page);
+		request.setAttribute("pageResult", pageResult);
+		return "/ad/ggpTypeList.jsp";
 	}
 }
