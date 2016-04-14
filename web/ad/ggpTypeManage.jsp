@@ -117,14 +117,14 @@ function submitGgpTypeAdd(eleid,ischeck){
 }
 
 function submitGgpUpdate(eleid,ischeck){
-    var mc= $("#mc").val();
+    var mc= $("#updatemc").val();
     if(mc==null||mc==""){
        $("#mcInfo").show();
        return;
     }else{
        $("#mcInfo").hide();
     }
-    var ms=$("#ms").val();
+    var ms=$("#updatems").val();
     if(ms==null||ms==""){
        $("#msInfo").show();
        return;

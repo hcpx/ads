@@ -23,9 +23,9 @@ public class GgpController extends BaseController{
 	@Autowired
 	private AdService adService;
 	
-	@RequestMapping("/loadGgpManger.do")
+	@RequestMapping("/loadGgpTypeManger.do")
 	public String loadGgpManger(){
-		return "/ad/ggpManage.jsp";
+		return "/ad/ggpTypeManage.jsp";
 	}
 	
 	@RequestMapping("/getGgTypeList.do")
@@ -64,19 +64,19 @@ public class GgpController extends BaseController{
 		getBean(ggpType, request);
 		ggpType.setId(CommonUtils.getUUid());
 		adService.addggpType(ggpType);
-		return "/ggp/loadGgpManger.do";
+		return "/ggp/loadGgpTypeManger.do";
 	}
 	
 	@RequestMapping("/updateGgpType.do")
 	public String updateGgpType(HttpServletRequest request, HttpServletResponse response){
 		String id = request.getParameter("id");
-		String mc = request.getParameter("mc");
-		String ms = request.getParameter("ms");
+		String mc = request.getParameter("updatemc");
+		String ms = request.getParameter("updatems");
 		GgpType ggpType = adService.findggpType(id);
 		ggpType.setMc(mc);
 		ggpType.setMs(ms);
 		adService.updateGgp(ggpType);
-		return "/ggp/loadGgpManger.do";
+		return "/ggp/loadGgpTypeManger.do";
 	}
 	
 	@RequestMapping("/showGgpType.do")
@@ -92,6 +92,6 @@ public class GgpController extends BaseController{
 		String id = request.getParameter("id");
 		GgpType ggpType = adService.findggpType(id);
 		adService.delete(ggpType);
-		return "/ggp/loadGgpManger.do";
+		return "/ggp/loadGgpTypeManger.do";
 	}
 }

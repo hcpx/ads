@@ -21,8 +21,8 @@
 					<label>广告类型名称：</label>
 				</div>
 				<div class="col-md-7 controls">
-					<input type="text" class="form-control" id="mc" name="mc"
-						value="${ggpType.mc }"> <label id="mcInfo"
+					<input type="text" class="form-control" id="updatemc" name="updatemc"
+						value="${ggpType.mc }"><label id="mcInfo"
 						class="errorInfo">*名称不能为空</label> <input type="hidden" name="id"
 						value="${ggpType.id }">
 				</div>
@@ -32,8 +32,8 @@
 					<label>类型描述：</label>
 				</div>
 				<div class="col-md-7 controls">
-					<input type="text" class="form-control" id="ms"
-						name="ms" value="${ggpType.ms }"> <label
+					<input type="text" class="form-control" id="updatems"
+						name="updatems" value="${ggpType.ms }"> <label
 						id="passwordInfo" class="errorInfo">*描述不能为空</label>
 				</div>
 			</div>

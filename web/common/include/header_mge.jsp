@@ -21,7 +21,7 @@ String dflogo=path+"/images/logo.png";
     	<ul class="nav navbar-nav" style="min-width: 750px">
 			<li class="dropdown" onclick="window.location='<%=path%>/user/loadUserManger.do'" ><a id="drop1" data-target="#" class="nav_focus" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">人员管理</a></li>
 			<li class="dropdown" onclick="window.location='<%=path%>/order/loadOrderManger.do'" ><a id="drop1" data-target="#" class="nav_focus" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">订单管理</a></li>
-			<li class="dropdown" onclick="window.location='<%=path%>/ggp/loadGgpManger.do'" ><a id="drop1" data-target="#" class="nav_focus" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">广告牌管理</a></li>
+			<li class="dropdown" onclick="window.location='<%=path%>/ggp/loadGgpTypeManger.do'" ><a id="drop1" data-target="#" class="nav_focus" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">广告牌管理</a></li>
     	</ul>
     	<ul class="nav navbar-nav navbar-right">
       		<li class="dropdown">
