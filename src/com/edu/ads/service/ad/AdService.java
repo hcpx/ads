@@ -1,5 +1,6 @@
 package com.edu.ads.service.ad;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,14 @@ public class AdService {
 	 */
 	public void delete(GgpType ggpType) {
 		ggpTypeDao.delete(ggpType);
+	}
+	
+	/**
+	 * 找到所有广告类型
+	 * @param id
+	 * @return User
+	 */
+	public List<GgpType> getAllGgType() {
+		return ggpTypeDao.getAllgglx();
 	}
 }

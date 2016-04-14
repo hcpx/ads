@@ -1,11 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +28,7 @@
 }
 </style>
 <script type="text/javascript">
-        var path='<%=basePath%>
-	';
+    var path='<%=basePath%>';
 	$(document).ready(function() {
 		loadPage(1);
 
@@ -44,7 +43,6 @@
 		$("#content").load(url, data, function(data) {
 			initB3paginator();
 		});
-
 	}
 
 	function getParam(currentPage) {
@@ -206,6 +204,16 @@
 							<option value="2">使用中</option>
 						</select>
 					</div>
+					
+					<div class="form-group">
+						<select class="form-control" id="ggpType">
+							<option value="">广告类型</option>
+							<c:forEach items="${ggpTypeList}" var="gglx">
+								<option value="${gglx.id}">${gglx.mc}</option>
+							</c:forEach>
+						</select>
+					</div>
+					
 					<span class="btn btn-primary" onclick="loadPage(1)">查询</span> <span
 						class="btn btn-primary" onclick="loadGgpTypeAddPage()">添加</span>
 				</div>

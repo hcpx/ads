@@ -33,6 +33,10 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 		return (List<T>)getHibernateTemplate().find(querySql, params);
 	}
 	
+	public List<T> findListForList(String querySql){
+		return (List<T>)getHibernateTemplate().find(querySql);
+	}
+	
 	
 	@Override
 	public String save(T entity) {
@@ -101,20 +105,18 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 		for(Entry<String, Object> entry:entrys){
 			whereSql.append(" and ");
 			whereSql.append(entry.getKey());
-//			whereSql.append("=");
-			whereSql.append(" like :");
-			whereSql.append(entry.getKey());
+			whereSql.append("=");
+			whereSql.append("?");
 		}
 		return whereSql.toString();
 	}
 	
 	private void setParams(Map<String,Object> params,Query query ){
 		Set<Entry<String, Object>> entrys =  params.entrySet();
-//		int index = 0;
+		int index = 0;
 		for(Entry<String, Object> entry:entrys){
-//			query.setParameter(index, entry.getValue());
-//			index++;
-			query.setString(entry.getKey(), "%"+entry.getValue()+"%");
+			query.setParameter(index, entry.getValue());
+			index++;
 		}
 		
 	}
