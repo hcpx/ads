@@ -1,5 +1,6 @@
 package com.edu.ads.controller.ad;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,32 +10,33 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.edu.ads.bean.ggp.GgpType;
 import com.edu.ads.common.page.Page;
 import com.edu.ads.common.page.PageResult;
+import com.edu.ads.common.utils.CommonUtils;
+import com.edu.ads.controller.BaseController;
 import com.edu.ads.service.ad.AdService;
 
 @Controller
 @RequestMapping("/ggp")
-public class GgpController {
+public class GgpController extends BaseController{
 	@Autowired
 	private AdService adService;
 	
 	@RequestMapping("/loadGgpManger.do")
-	public String loadUserManger(){
+	public String loadGgpManger(){
 		return "/ad/ggpManage.jsp";
 	}
 	
 	@RequestMapping("/getGgTypeList.do")
-	public String getUserList(HttpServletRequest request, HttpServletResponse response){
-		String title =request.getParameter("title");
+	public String getGgTypeList(HttpServletRequest request, HttpServletResponse response){
+		String mc =request.getParameter("mc");
 	    String currentPage = request.getParameter("currentPage");
 	    String pageSize = request.getParameter("pageSize");
 	    Page page = bulidPage(currentPage, pageSize);
 		Map<String,Object> param = new HashMap<String,Object>();
-		if(title!=null&&!"".equals(title)){
-			param.put("mc", title);
+		if(mc!=null&&!"".equals(mc)){
+			param.put("mc", mc);
 		}
 		String ordery = " order by mc desc";
 		PageResult<GgpType> pageResult = adService.ggTypeList(param, page, ordery);
@@ -52,7 +54,44 @@ public class GgpController {
 	}
 	
 	@RequestMapping("/loadGgpTypeAdd.do")
-	public String loadUserAdd(){
+	public String loadGgpTypeAdd(){
 		return "/ad/addGgpType.jsp";
+	}
+	
+	@RequestMapping("/saveGgpType.do")
+	public String saveGgpType(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		GgpType ggpType = new GgpType();
+		getBean(ggpType, request);
+		ggpType.setId(CommonUtils.getUUid());
+		adService.addggpType(ggpType);
+		return "/ggp/loadGgpManger.do";
+	}
+	
+	@RequestMapping("/updateGgpType.do")
+	public String updateGgpType(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		String mc = request.getParameter("mc");
+		String ms = request.getParameter("ms");
+		GgpType ggpType = adService.findggpType(id);
+		ggpType.setMc(mc);
+		ggpType.setMs(ms);
+		adService.updateGgp(ggpType);
+		return "/ggp/loadGgpManger.do";
+	}
+	
+	@RequestMapping("/showGgpType.do")
+	public String showGgpType(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		GgpType ggpType = adService.findggpType(id);
+		request.setAttribute("ggpType",ggpType);
+		return "/ad/ggpTypeEedit.jsp";
+	}
+	
+	@RequestMapping("/deleteGgpType.do")
+	public String deleteGgpType(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		GgpType ggpType = adService.findggpType(id);
+		adService.delete(ggpType);
+		return "/ggp/loadGgpManger.do";
 	}
 }

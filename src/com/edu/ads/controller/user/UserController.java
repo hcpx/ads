@@ -103,7 +103,7 @@ public class UserController extends BaseController{
 		String ordery = " order by name desc";
 		PageResult<User> pageResult = userService.list(param, page, ordery);
 		double totalCount =pageResult.getTotalRecords();
-		double perPageSize = Integer.valueOf(pageSize);
+		double perPageSize = page.getPageLength();
 		double pageSzie = Math.ceil(totalCount/perPageSize);
 		pageResult.setTotPage((int)pageSzie);
 		pageResult.setPage(page);
@@ -113,7 +113,16 @@ public class UserController extends BaseController{
 	
 	
 	private Page bulidPage(String currentPage,String pageSize){
-		return  new Page(Integer.valueOf(currentPage),Integer.valueOf(pageSize));
+		int current = 0;
+		int size = 5;
+		try{
+			 current = Integer.valueOf(currentPage);
+			 size = Integer.valueOf(pageSize);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return  new Page(current,size);
 	}
 	@RequestMapping("/loadUserAdd.do")
 	public String loadUserAdd(){

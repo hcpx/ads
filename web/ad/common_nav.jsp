@@ -17,7 +17,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>左侧导航</title>
+    <title>广告牌类型管理页</title>
 </head>
 <body>
 <div class="row">
@@ -35,9 +35,9 @@
                 <div class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div class="list-group">
-                            <a id="loadManger" href="<%=path %>/user/loadUserManger.do" class="list-group-item <%="user".equals(target) ? "active" : "" %>">广告牌类型</a>
-                            <a id="loadManger" href="<%=path %>/user/loadUserManger.do" class="list-group-item <%="user".equals(target) ? "active" : "" %>">广告牌</a>
-                            <a id="loadManger" href="<%=path %>/user/loadUserManger.do" class="list-group-item <%="user".equals(target) ? "active" : "" %>">广告牌图片</a>
+                            <a id="loadManger" href="<%=path %>/ggp/loadGgpManger.do" class="list-group-item <%="ggplx".equals(target) ? "active" : "" %>">广告牌类型</a>
+                            <a id="loadManger" href="<%=path %>/user/loadUserManger.do" class="list-group-item <%="ggplx".equals(target) ? "active" : "" %>">广告牌</a>
+                            <a id="loadManger" href="<%=path %>/user/loadUserManger.do" class="list-group-item <%="ggplx".equals(target) ? "active" : "" %>">广告牌图片</a>
                         </div>
                     </div>
                 </div>

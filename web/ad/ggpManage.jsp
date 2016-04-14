@@ -94,50 +94,48 @@ function initB3paginator(){
 }
 
 function loadGgpTypeAddPage(){
-   var url = path+"ad/loadGgpTypeAdd.do";
+   var url = path+"ggp/loadGgpTypeAdd.do";
    $("#well").load(url);
 }
 
-function submitUserAdd(eleid,ischeck){
-    var name= $("#name").val();
-    if(name==null||name==""){
-       $("#nameInfo").show();
+function submitGgpTypeAdd(eleid,ischeck){
+    var mc= $("#mc").val();
+    if(mc==null||mc==""){
+       $("#mcInfo").show();
        return;
     }else{
-       $("#nameInfo").hide();
+       $("#mcInfo").hide();
     }
-    var userType=$("#userType").val();
-    if(userType==null||userType==""){
-       $("#typeInfo").show();
+    var ms=$("#ms").val();
+    if(ms==null||ms==""){
+       $("#msInfo").show();
        return;
     }else{
-       $("#typeInfo").hide();
+       $("#msInfo").hide();
     }
-    var userName = $("#username").val();
-    if(userName==null||userName==""){
-       $("#usernameInfo").show();
-       return;
-    }else{
-      $("#usernameInfo").hide();
-    }
-    var password = $("#password").val();
-    if(password==null||password==""){
-       $("#passwordInfo").show();
-       return;
-    }else{
-      $("#passwordInfo").hide();
-    }
-    if(ischeck){
-	    if(!checkUserNameExist()){
-	       return;
-	    }
-    }
-    
     $("#"+eleid).submit();
 }
 
-function showUser(id){
-	var remote_url = path+"user/showUser.do?id="+id;
+function submitGgpUpdate(eleid,ischeck){
+    var mc= $("#mc").val();
+    if(mc==null||mc==""){
+       $("#mcInfo").show();
+       return;
+    }else{
+       $("#mcInfo").hide();
+    }
+    var ms=$("#ms").val();
+    if(ms==null||ms==""){
+       $("#msInfo").show();
+       return;
+    }else{
+       $("#msInfo").hide();
+    }
+    $("#"+eleid).submit();
+}
+
+function showGgpType(id){
+	var remote_url = path+"ggp/showGgpType.do?id="+id;
 	$("#modal").modal({ backdrop: 'static', keyboard: false, show:true, remote: remote_url });
 	$("#modal").modal("show");
 }
@@ -147,7 +145,7 @@ function reback(){
 }
 
 function updateGgpType(id){
-	var remote_url = path+"ad/updateGgpType.do?id="+id;
+	var remote_url = path+"ggp/updateGgpType.do?id="+id;
 	$("#modal").modal({ backdrop: 'static', keyboard: false, show:true, remote: remote_url });
 	$("#modal").modal("show");
 }
@@ -166,26 +164,19 @@ function updateGgpType(id){
 
 		<!-- 左侧菜单 -->
 		<jsp:include page="/ad/common_nav.jsp">
-			<jsp:param name="target" value="user" />
+			<jsp:param name="target" value="ggplx" />
 		</jsp:include>
 
 			<!-- 右侧内容 -->
 			<div id="well" class="col-md-10">
 				<div  class="">
 					<div id="data_header" class="page-header clearfix" style="margin: 0px 0 20px">
-						<h1 class="pull-left">人员管理</h1>
+						<h1 class="pull-left">广告牌管理</h1>
 					</div>
 					<div class="form-inline well well-sm">
 						<div class="form-group">
-							<input id="name" type="text" class="form-control"
-								placeholder="请输入姓名">
-						</div>
-						<div class="form-group">
-							<select class="form-control" id="userType">
-								<option value="">人员类型</option>
-								<option value="1">管理员</option>
-								<option value="2">销售人员</option>
-							</select>
+							<input id="mc" type="text" class="form-control"
+								placeholder="请输入广告类型名">
 						</div>
 						<span class="btn btn-primary" onclick="loadPage(1)">查询</span> 
 						<span class="btn btn-primary" onclick="loadGgpTypeAddPage()">添加</span>

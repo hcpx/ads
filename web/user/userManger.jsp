@@ -22,11 +22,9 @@
 <link href="<%=path%>/common/css/global.css" rel="stylesheet" />
 <link href="<%=path%>/common/css/public.css" rel="stylesheet" />
 <script src="js/bootstrap/bootstrap.min.js"></script>
-<script
-	src="<%=basePath%>js/bootstrap/bootstrap-paginator.min.js"></script>
+<script src="<%=basePath%>js/bootstrap/bootstrap-paginator.min.js"></script>
 <script src="<%=basePath%>js/bootstrap/b3paginator.js"></script>
 <style type="text/css">
-   .errorInfo{color:red;display:none;}
 </style>
 <script type="text/javascript">
         var path='<%=basePath%>';
@@ -195,7 +193,7 @@ function updateUser(id){
 	<div class="container admin-container">
 		<!-- 顶部内容 -->
 		<header class="navbar navbar-inverse navbar-fixed-top docs-nav"
-				role="banner">
+			role="banner">
 			<jsp:include page="/common/include/header_mge.jsp">
 				<jsp:param name="target" value="user" />
 			</jsp:include>
@@ -206,39 +204,41 @@ function updateUser(id){
 			<jsp:param name="target" value="user" />
 		</jsp:include>
 
-			<!-- 右侧内容 -->
-			<div id="well" class="col-md-10">
-				<div  class="">
-					<div id="data_header" class="page-header clearfix" style="margin: 0px 0 20px">
-						<h1 class="pull-left">人员管理</h1>
-					</div>
-					<div class="form-inline well well-sm">
-						<div class="form-group">
-							<input id="name" type="text" class="form-control"
-								placeholder="请输入姓名">
-						</div>
-						<div class="form-group">
-							<select class="form-control" id="userType">
-								<option value="">人员类型</option>
-								<option value="1">管理员</option>
-								<option value="2">销售人员</option>
-							</select>
-						</div>
-						<span class="btn btn-primary" onclick="loadPage(1)">查询</span> 
-						<span class="btn btn-primary" onclick="loadUserAddPage()">添加</span>
-					</div>
+		<!-- 右侧内容 -->
+		<div id="well" class="col-md-10">
+			<div class="">
+				<div id="data_header" class="page-header clearfix"
+					style="margin: 0px 0 20px">
+					<h1 class="pull-left">人员管理</h1>
 				</div>
-				<div id="content"></div>
+				<div class="form-inline well well-sm">
+					<div class="form-group">
+						<input id="name" type="text" class="form-control"
+							placeholder="请输入姓名">
+					</div>
+					<div class="form-group">
+						<select class="form-control" id="userType">
+							<option value="">人员类型</option>
+							<option value="1">管理员</option>
+							<option value="2">销售人员</option>
+						</select>
+					</div>
+					<span class="btn btn-primary" onclick="loadPage(1)">查询</span> <span
+						class="btn btn-primary" onclick="loadUserAddPage()">添加</span>
+				</div>
 			</div>
+			<div id="content"></div>
 		</div>
 	</div>
 
 	<!-- modal -->
-	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true" style="width:800px;">
 		<div class="modal-dialog">
 			<div class="modal-content" id="modalcontent">
 				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title"></h4>
