@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.edu.ads.bean.ggp.Ggp;
 import com.edu.ads.bean.ggp.GgpType;
 import com.edu.ads.common.page.Page;
 import com.edu.ads.common.page.PageResult;
@@ -25,7 +27,7 @@ public class GgpController extends BaseController{
 	private AdService adService;
 	
 	
-	/*广告牌类型controller*/
+	/*=======================================广告牌类型==============================================*/
 	@RequestMapping("/loadGgpTypeManger.do")
 	public String loadGgpTypeManger(){
 		return "/ad/ggpTypeManage.jsp";
@@ -98,7 +100,7 @@ public class GgpController extends BaseController{
 		return "/ggp/loadGgpTypeManger.do";
 	}
 	
-	/*广告牌controller*/
+	/*=======================================广告牌==============================================*/
 	@RequestMapping("/loadGgpManger.do")
 	public String loadGgpManger(HttpServletRequest request, HttpServletResponse response){
 		List<GgpType> ggpTypeList=adService.getAllGgType();
@@ -125,5 +127,29 @@ public class GgpController extends BaseController{
 		pageResult.setPage(page);
 		request.setAttribute("pageResult", pageResult);
 		return "/ad/ggpTypeList.jsp";
+	}
+	
+	@RequestMapping("/loadGgpAdd.do")
+	public String loadGgpAdd(){
+		return "/ad/addGgp.jsp";
+	}
+	
+	@RequestMapping("/saveGgp.do")
+	public String saveGgp(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		Ggp ggp = new Ggp();
+		getBean(ggp, request);
+		ggp.setId(CommonUtils.getUUid());
+		adService.addggp(ggp);
+		return "/ggp/loadGgpTypeManger.do";
+	}
+	
+	@RequestMapping("/checkGgpLxCount.do")
+	public void checkGgpLxCount(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		if(adService.getAllTypeCount()==0){
+			response.getWriter().write("true");
+		}else{
+			response.getWriter().write("false");
+		}
+		response.getWriter().flush();
 	}
 }

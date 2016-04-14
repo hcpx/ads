@@ -56,7 +56,7 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 
 	@Override
 	public long getCount() {
-		String sql ="select count(" + this.getCountField(this.entityClazz) + ") from "+buildEntityName() ;
+		String sql ="select count(*) from "+buildEntityName() ;
 		return getHibernateTemplate().find(sql).size();
 	}
 	

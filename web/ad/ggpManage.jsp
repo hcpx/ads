@@ -101,9 +101,25 @@
 		});
 	}
 
-	function loadGgpTypeAddPage() {
-		var url = path + "ggp/loadGgpTypeAdd.do";
+	function loadGgpAddPage() {
+		if(checkGgpLxCount())
+			alert("请先添加广告牌类型");
+		var url = path + "ggp/loadGgpAdd.do";
 		$("#well").load(url);
+	}
+
+	function checkGgpLxCount() {
+		var url = path + "ggp/checkGgpLxCount.do";
+		var flag = true;
+		$.ajax({
+			type : 'POST',
+			async : false,
+			url : url,
+			success : function(res) {
+				flag=res;
+			}
+		});
+		return flag;
 	}
 
 	function submitGgpTypeAdd(eleid, ischeck) {
@@ -204,7 +220,7 @@
 							<option value="2">使用中</option>
 						</select>
 					</div>
-					
+
 					<div class="form-group">
 						<select class="form-control" id="ggpType">
 							<option value="">广告类型</option>
@@ -213,9 +229,9 @@
 							</c:forEach>
 						</select>
 					</div>
-					
+
 					<span class="btn btn-primary" onclick="loadPage(1)">查询</span> <span
-						class="btn btn-primary" onclick="loadGgpTypeAddPage()">添加</span>
+						class="btn btn-primary" onclick="loadGgpAddPage()">添加</span>
 				</div>
 			</div>
 			<div id="content"></div>
