@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.edu.ads.bean.ggp.Ggp;
 import com.edu.ads.bean.ggp.GgpType;
+import com.edu.ads.bean.user.User;
 import com.edu.ads.common.page.Page;
 import com.edu.ads.common.page.PageResult;
 import com.edu.ads.common.utils.CommonUtils;
@@ -130,14 +131,21 @@ public class GgpController extends BaseController{
 	}
 	
 	@RequestMapping("/loadGgpAdd.do")
-	public String loadGgpAdd(){
+	public String loadGgpAdd(HttpServletRequest request, HttpServletResponse response){
+		List<GgpType> ggpTypeList=adService.getAllGgType();
+		request.setAttribute("ggpTypeList", ggpTypeList);
 		return "/ad/addGgp.jsp";
 	}
 	
 	@RequestMapping("/saveGgp.do")
 	public String saveGgp(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String lx =request.getParameter("lx");
+		User user=(User)request.getSession().getAttribute("user");
 		Ggp ggp = new Ggp();
 		getBean(ggp, request);
+		GgpType type=adService.findggpType(lx);
+		ggp.setLx(type);
+		ggp.setTjry(user!=null?user.getName():"");
 		ggp.setId(CommonUtils.getUUid());
 		adService.addggp(ggp);
 		return "/ggp/loadGgpTypeManger.do";
@@ -146,9 +154,9 @@ public class GgpController extends BaseController{
 	@RequestMapping("/checkGgpLxCount.do")
 	public void checkGgpLxCount(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		if(adService.getAllTypeCount()==0){
-			response.getWriter().write("true");
+			response.getWriter().write("1");
 		}else{
-			response.getWriter().write("false");
+			response.getWriter().write("0");
 		}
 		response.getWriter().flush();
 	}

@@ -102,33 +102,40 @@
 	}
 
 	function loadGgpAddPage() {
-		if(checkGgpLxCount())
+		if ("1" == checkGgpLxCount()) {
 			alert("请先添加广告牌类型");
+			return;
+		}
+		var userid = $("#userid").val();
+		if (userid == null || userid == "") {
+			alert("登陆超时,请重新进行登陆");
+			return;
+		}
 		var url = path + "ggp/loadGgpAdd.do";
 		$("#well").load(url);
 	}
 
 	function checkGgpLxCount() {
 		var url = path + "ggp/checkGgpLxCount.do";
-		var flag = true;
+		var flag = "1";
 		$.ajax({
 			type : 'POST',
 			async : false,
 			url : url,
 			success : function(res) {
-				flag=res;
+				flag = res;
 			}
 		});
 		return flag;
 	}
 
-	function submitGgpTypeAdd(eleid, ischeck) {
-		var mc = $("#mc").val();
-		if (mc == null || mc == "") {
-			$("#mcInfo").show();
+	function submitGgpAdd(eleid, ischeck) {
+		var ggpType = $("#lx").val();
+		if (ggpType == null || ggpType == "-1") {
+			$("#ggpTypeInfo").show();
 			return;
 		} else {
-			$("#mcInfo").hide();
+			$("#ggpTypeInfo").hide();
 		}
 		var ms = $("#ms").val();
 		if (ms == null || ms == "") {
@@ -136,26 +143,48 @@
 			return;
 		} else {
 			$("#msInfo").hide();
+		}
+		var price = $("#jg").val();
+		if (price == null || price == "" || !validate(price)) {
+			$("#priceInfo").show();
+			return;
+		} else {
+			$("#priceInfo").hide();
+		}
+		$("#" + eleid).submit();
+
+	}
+
+	function submitGgpUpdate(eleid, ischeck) {
+		var ggpType = $("#ggpType ").val();
+		if (ggpType == null || ggpType == "" || ggpType=="-1") {
+			$("#ggpTypeInfo").show();
+			return;
+		} else {
+			$("#ggpTypeInfo").hide();
+		}
+		var ms = $("#ms").val();
+		if (ms == null || ms == "") {
+			$("#msInfo").show();
+			return;
+		} else {
+			$("#msInfo").hide();
+		}
+		var price = $("#price").val();
+		if (price == null || price == "") {
+			$("#priceInfo").show();
+			return;
+		} else {
+			$("#priceInfo").hide();
 		}
 		$("#" + eleid).submit();
 	}
 
-	function submitGgpUpdate(eleid, ischeck) {
-		var mc = $("#mc").val();
-		if (mc == null || mc == "") {
-			$("#mcInfo").show();
-			return;
-		} else {
-			$("#mcInfo").hide();
-		}
-		var ms = $("#ms").val();
-		if (ms == null || ms == "") {
-			$("#msInfo").show();
-			return;
-		} else {
-			$("#msInfo").hide();
-		}
-		$("#" + eleid).submit();
+	function validate(num) {
+		var reg = /^\d+(?=\.{0,1}\d+$|$)/
+		if (reg.test(num))
+			return true;
+		return false;
 	}
 
 	function showGgpType(id) {
@@ -208,6 +237,7 @@
 					style="margin: 0px 0 20px">
 					<h1 class="pull-left">广告牌管理</h1>
 				</div>
+				<input type="hidden" name="userid" id="userid" value="${sessionScope.user.id}" />
 				<div class="form-inline well well-sm">
 					<div class="form-group">
 						<input id="ms" type="text" class="form-control"
