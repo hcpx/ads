@@ -24,7 +24,7 @@
 				<div class="col-md-7 controls">
 					<input type="text" class="form-control" id="updatems"
 						name="updatems" value="${ggp.ms }"><label id="msInfo"
-						class="errorInfo">*名称不能为空</label> <input type="hidden" name="id"
+						class="errorInfo">*描述不能为空</label> <input type="hidden" name="id"
 						value="${ggp.id }">
 				</div>
 			</div>
@@ -45,11 +45,26 @@
 			</div>
 			<div class="row form-group">
 				<div class="col-md-3 control-label">
+					<label>广告牌使用状态：</label>
+				</div>
+				<div class="col-md-7 controls">
+					<div class="input-group">
+						<select class="form-control" id="lx" name="zt">
+							<option value="1"
+									<c:if test="${ggp.zt==1}">selected</c:if>>空闲</option>
+							<option value="2"
+									<c:if test="${ggp.zt==2}">selected</c:if>>使用中</option>
+						</select> <label id="ztInfo" class="errorInfo">*必须选择一个类型</label>
+					</div>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-3 control-label">
 					<label>日价格：</label>
 				</div>
 				<div class="col-md-7 controls">
 					<input type="text" class="form-control" id="updatejg"
-						name="updatems" value="${ggp.jg }"> <label id="jgInfo"
+						name="updatejg" value="${ggp.jg }"> <label id="jgInfo"
 						class="errorInfo">*价格格式不正确</label>
 				</div>
 			</div>
@@ -59,7 +74,7 @@
 				</div>
 				<div class="col-md-7 controls">
 					<input type="text" class="form-control" id="tjr"
-						name="tjr" value="${ggp.tjry } readonly="true" />
+						name="tjr" value="${ggp.tjry }" readonly="true" />
 				</div>
 			</div>
 		</div>

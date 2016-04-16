@@ -48,7 +48,9 @@
 	function getParam(currentPage) {
 		var curp = 1;
 		var pageSize = 5;
-		var mc = $("#mc").val();
+		var ms = $("#ms").val();
+		var useInfo = $("#useInfo").val();
+		var ggpType = $("#ggpType").val();
 		var userType = $("#userType").val();
 		if (userType == null || userType == "") {
 			userType = 1;
@@ -63,7 +65,9 @@
 			curp = $("#curPage").val();
 		}
 		var data = {
-			mc : mc,
+			ms : ms,
+			useInfo : useInfo,
+			ggpType : ggpType,
 			currentPage : curp,
 			pageSize : pageSize,
 			totPage : totPage
@@ -156,26 +160,19 @@
 	}
 
 	function submitGgpUpdate(eleid, ischeck) {
-		var ggpType = $("#ggpType ").val();
-		if (ggpType == null || ggpType == "" || ggpType=="-1") {
-			$("#ggpTypeInfo").show();
-			return;
-		} else {
-			$("#ggpTypeInfo").hide();
-		}
-		var ms = $("#ms").val();
-		if (ms == null || ms == "") {
+		var updatems = $("#updatems ").val();
+		if (updatems == null || updatems == "") {
 			$("#msInfo").show();
 			return;
 		} else {
 			$("#msInfo").hide();
 		}
-		var price = $("#price").val();
-		if (price == null || price == "") {
-			$("#priceInfo").show();
+		var updatejg = $("#updatejg").val();
+		if (updatejg == null || updatejg == "" || !validate(updatejg)) {
+			$("#jgInfo").show();
 			return;
 		} else {
-			$("#priceInfo").hide();
+			$("#jgInfo").hide();
 		}
 		$("#" + eleid).submit();
 	}
@@ -200,17 +197,6 @@
 
 	function reback() {
 		$("#loadManger").click();
-	}
-
-	function updateGgpType(id) {
-		var remote_url = path + "ggp/updateGgpType.do?id=" + id;
-		$("#modal").modal({
-			backdrop : 'static',
-			keyboard : false,
-			show : true,
-			remote : remote_url
-		});
-		$("#modal").modal("show");
 	}
 </script>
 </head>

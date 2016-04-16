@@ -121,10 +121,10 @@ public class GgpController extends BaseController{
 			param.put("ms", ms);
 		}
 		if(useInfo!=null&&!"".equals(useInfo)){
-			param.put("zt", useInfo);
+			param.put("zt", Integer.valueOf(useInfo));
 		}
 		if(ggpType!=null&&!"".equals(ggpType)){
-			param.put("lx", ggpType);
+			param.put("lx",adService.findggpType(ggpType));
 		}
 		String ordery = " order by jg desc";
 		PageResult<Ggp> pageResult = adService.ggpList(param, page, ordery);
@@ -174,7 +174,34 @@ public class GgpController extends BaseController{
 	public String showGgp(HttpServletRequest request, HttpServletResponse response){
 		String id = request.getParameter("id");
 		Ggp ggp = adService.findggp(id);
+		List<GgpType> ggpTypeList=adService.getAllGgType();
+		request.setAttribute("ggpTypeList", ggpTypeList);
 		request.setAttribute("ggp",ggp);
 		return "/ad/ggpEedit.jsp";
+	}
+	
+	@RequestMapping("/updateGgp.do")
+	public String updateGgp(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		String lx = request.getParameter("lx");
+		String ms = request.getParameter("updatems");
+		String zt = request.getParameter("zt");
+		String updatejg = request.getParameter("updatejg");
+		Ggp Ggp = adService.findggp(id);
+		GgpType type=adService.findggpType(lx);
+		Ggp.setLx(type);
+		Ggp.setMs(ms);
+		Ggp.setZt(Integer.valueOf(zt));
+		Ggp.setJg(Double.valueOf(updatejg));
+		adService.upGgp(Ggp);
+		return "/ggp/loadGgpManger.do";
+	}
+	
+	@RequestMapping("/deleteGgp.do")
+	public String deleteGgp(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		Ggp Ggp = adService.findggp(id);
+		adService.deleteGgp(Ggp);
+		return "/ggp/loadGgpManger.do";
 	}
 }

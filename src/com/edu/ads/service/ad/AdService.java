@@ -38,7 +38,7 @@ public class AdService {
 	
 	/**
 	 * 新增广告类型
-	 * @param user
+	 * @param void
 	 */
 	public void addggpType(GgpType ggpType){
 		ggpTypeDao.save(ggpType);
@@ -46,8 +46,8 @@ public class AdService {
 	
 	/**
 	 * 更新广告类型
-	 * @param id
-	 * @return User
+	 * @param GgpType
+	 * @return void
 	 */
 	public void updateGgp(GgpType ggpType){
 		ggpTypeDao.update(ggpType);
@@ -56,7 +56,7 @@ public class AdService {
 	/**
 	 * 查找广告类型
 	 * @param id
-	 * @return User
+	 * @return GgpType
 	 */
 	public GgpType findggpType(String id){
 		return ggpTypeDao.find(id);
@@ -65,7 +65,7 @@ public class AdService {
 	/**
 	 * 查找广告类型
 	 * @param id
-	 * @return User
+	 * @return void
 	 */
 	public void delete(GgpType ggpType) {
 		ggpTypeDao.delete(ggpType);
@@ -74,7 +74,7 @@ public class AdService {
 	/**
 	 * 找到所有广告类型
 	 * @param id
-	 * @return User
+	 * @return List<GgpType>
 	 */
 	public List<GgpType> getAllGgType() {
 		return ggpTypeDao.getAllgglx();
@@ -83,7 +83,7 @@ public class AdService {
 	/**
 	 * 找到所有广告类型总条数
 	 * @param id
-	 * @return User
+	 * @return int
 	 */
 	public int getAllTypeCount() {
 		int count=(int)ggpTypeDao.getCount();
@@ -93,7 +93,7 @@ public class AdService {
 	/*=======================================广告牌==============================================*/
 	/**
 	 * 新增广告牌
-	 * @param user
+	 * @param void
 	 */
 	public void addggp(Ggp ggp){
 		ggpDao.save(ggp);
@@ -103,9 +103,27 @@ public class AdService {
 	/**
 	 * 查找广告牌
 	 * @param id
-	 * @return User
+	 * @return Ggp
 	 */
 	public Ggp findggp(String id){
 		return ggpDao.find(id);
+	}
+	
+	/**
+	 * 更新广告类型
+	 * @param id
+	 * @return void
+	 */
+	public void upGgp(Ggp ggp){
+		ggpDao.update(ggp);
+	}
+	
+	/**
+	 * 删除广告牌
+	 * @param id
+	 * @return voids
+	 */
+	public void deleteGgp(Ggp ggp) {
+		ggpDao.delete(ggp);
 	}
 }

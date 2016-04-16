@@ -21,7 +21,7 @@ public class Ggp {
 	@Column(name = "c_id", nullable = false, length = 32)
 	private String id;
 	
-	@ManyToOne(cascade={CascadeType.ALL})           
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH})           
     @JoinColumn(name="c_lx")
 	private GgpType lx;
 	

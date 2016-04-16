@@ -18,7 +18,8 @@ public class Ggptp {
 	@Column(name = "c_id", nullable = false, length = 32)
 	private String id;
 	
-	@ManyToOne(cascade={CascadeType.ALL})           
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH}) 
+	//这个name为one一方的数据库列名
     @JoinColumn(name="ggp_id") 
 	private Ggp ggp;
 	
