@@ -91,6 +91,45 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 		return pageResult;
 	}
 
+	public PageResult<T> getList(String whereString,List<Object> params,int starIndex,int maxResult,String orderBy){
+		//创建查询sql
+		StringBuffer queryString = bulidHql(whereString, orderBy);
+		String entityName = buildEntityName();
+		Session session =null;
+		PageResult<T> pageResult = new PageResult<T>();
+		try{
+			session = getHibernateSession();
+			Query query = session.createQuery(queryString.toString());
+			setParams(params, query);
+			query.setFirstResult(starIndex);
+			query.setMaxResults(maxResult);
+			pageResult.setRecords(query.list());
+			String countSql ="select count(" + this.getCountField(this.entityClazz) + ") from " + entityName + " o "
+					+ whereString;
+			query = session.createQuery(countSql);
+			setParams(params, query);
+			List objs = query.list();
+			pageResult.setTotalRecords(Integer.valueOf(objs.get(0).toString()));
+			return pageResult;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+		return pageResult;
+	}
+	
+	private StringBuffer bulidHql(String whereString,String orderBy){
+		StringBuffer queryString = new StringBuffer();
+		queryString.append("select o from ");
+		queryString.append( buildEntityName()).append(" o ");
+		queryString.append(whereString);
+		queryString.append(" ").append(orderBy);
+		return queryString;
+	}
+	
 	private StringBuffer bulidHql(Map<String, Object> params, String orderBy) {
 		StringBuffer queryString = new StringBuffer();
 		queryString.append("select o from ");
@@ -110,6 +149,14 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 			whereSql.append("?");
 		}
 		return whereSql.toString();
+	}
+	
+	private void setParams(List<Object> params,Query query){
+		int index = 0;
+		for(Object param:params){
+			query.setParameter(index, param);
+			index++;
+		}
 	}
 	
 	private void setParams(Map<String,Object> params,Query query ){
