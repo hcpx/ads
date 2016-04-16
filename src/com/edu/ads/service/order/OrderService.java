@@ -29,7 +29,11 @@ public class OrderService {
 		orderDao.save(o);
 	}
 	
-	public long getCount(){
-		return orderDao.getCount();
+	public long getCount(Map<String ,Object> params){
+		return orderDao.getCount(params);
+	}
+	
+	public void updateGgpzt(String ggpid,int ggpzt){
+		 orderDao.updateGgpzt(ggpid, ggpzt);
 	}
 }

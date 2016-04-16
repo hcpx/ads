@@ -86,7 +86,8 @@ public class OrderController extends BaseController{
     	User user = getLoginUser(request);
     	order.setXsry(user.getId());
 		orderService.save(order);
-		return "";
+		orderService.updateGgpzt(order.getGgpid(), 2);
+		return "/order/loadOrderManger.do";
 	}
 	
 	/**
@@ -116,16 +117,17 @@ public class OrderController extends BaseController{
 	    Page page = bulidPage(currentPage, pageSize);
 	    PageResult<Order> pageResult = new PageResult<Order>();
 	    Map<String,Object > params = new HashMap<String, Object>();
-	    if(StringUtils.isEmpty(xsrymc)){
+	    if(!StringUtils.isEmpty(xsrymc)){
 	    	params.put("xsryMc", xsrymc);
 	    }
-	    if(StringUtils.isEmpty(lxmc)){
+	    if(!StringUtils.isEmpty(lxmc)){
 	    	params.put("ggpType", lxmc);
 	    }
 	    pageResult.setRecords(orderService.listOrders( page, params));
 	    pageResult.setPage(page);
-	    pageResult.setTotalRecords(orderService.getCount());
-		return "/order/";
+	    pageResult.setTotalRecords(orderService.getCount(params));
+		request.setAttribute("pageResult", pageResult);
+		return "/order/orderList.jsp";
 	}
 	
 	

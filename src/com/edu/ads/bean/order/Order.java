@@ -63,7 +63,7 @@ public class Order {
 	/**
 	 * 外键广告牌
 	 */
-	@Column(name = "c_xsry", nullable = true, length = 300)
+	@Column(name = "c_ggpid", nullable = true, length = 300)
 	private String ggpid;
 
 	/**
@@ -79,7 +79,7 @@ public class Order {
 	/**
 	 * 订单时间
 	 */
-	@Column(name = "n_count", nullable = true)
+	@Column(name = "d_ddsj", nullable = true)
 	private Date ddsj;
 
 
