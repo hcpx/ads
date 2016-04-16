@@ -18,7 +18,9 @@ import com.edu.ads.dao.ad.GgptpDao;
 public class AdService {
 	@Autowired
 	private GgpTypeDao ggpTypeDao;
+	@Autowired
 	private GgpDao ggpDao;
+	@Autowired
 	private GgptpDao ggptpDao;
 	public PageResult<GgpType> ggTypeList(Map<String,Object> params,Page page,String ordery){
 		return ggpTypeDao.getList(page.getStartIndex(), page.getPageLength(), params, ordery);
