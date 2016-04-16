@@ -144,8 +144,8 @@
 		} else {
 			$("#msInfo").hide();
 		}
-		var price = $("#jg").val();
-		if (price == null || price == "" || !validate(price)) {
+		var jg = $("#jg").val();
+		if (jg == null || jg == "" || !validate(jg)) {
 			$("#priceInfo").show();
 			return;
 		} else {

@@ -2,6 +2,7 @@ package com.edu.ads.controller.ad;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.edu.ads.bean.ggp.Ggp;
 import com.edu.ads.bean.ggp.GgpType;
+import com.edu.ads.bean.ggp.Ggptp;
 import com.edu.ads.bean.user.User;
 import com.edu.ads.common.page.Page;
 import com.edu.ads.common.page.PageResult;
@@ -55,9 +57,6 @@ public class GgpController extends BaseController{
 		return "/ad/ggpTypeList.jsp";
 	}
 	
-	private Page bulidPage(String currentPage,String pageSize){
-		return  new Page(Integer.valueOf(currentPage),Integer.valueOf(pageSize));
-	}
 	
 	@RequestMapping("/loadGgpTypeAdd.do")
 	public String loadGgpTypeAdd(){
@@ -111,13 +110,21 @@ public class GgpController extends BaseController{
 	
 	@RequestMapping("/getGgpList.do")
 	public String getGgpList(HttpServletRequest request, HttpServletResponse response){
-		String mc =request.getParameter("mc");
+		String ms =request.getParameter("ms");
+		String useInfo =request.getParameter("useInfo");
+		String ggpType =request.getParameter("ggpType");
 	    String currentPage = request.getParameter("currentPage");
 	    String pageSize = request.getParameter("pageSize");
 	    Page page = bulidPage(currentPage, pageSize);
 		Map<String,Object> param = new HashMap<String,Object>();
-		if(mc!=null&&!"".equals(mc)){
-			param.put("mc", mc);
+		if(ms!=null&&!"".equals(ms)){
+			param.put("ms", ms);
+		}
+		if(useInfo!=null&&!"".equals(useInfo)){
+			param.put("zt", useInfo);
+		}
+		if(ggpType!=null&&!"".equals(ggpType)){
+			param.put("lx", ggpType);
 		}
 		String ordery = " order by mc desc";
 		PageResult<GgpType> pageResult = adService.ggTypeList(param, page, ordery);
@@ -147,8 +154,10 @@ public class GgpController extends BaseController{
 		ggp.setLx(type);
 		ggp.setTjry(user!=null?user.getName():"");
 		ggp.setId(CommonUtils.getUUid());
+		ggp.setZt(1);
+		ggp.setGgptps(new HashSet<Ggptp>());
 		adService.addggp(ggp);
-		return "/ggp/loadGgpTypeManger.do";
+		return "/ad/loadGgpManger.do";
 	}
 	
 	@RequestMapping("/checkGgpLxCount.do")
