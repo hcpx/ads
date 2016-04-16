@@ -22,7 +22,7 @@ public class Ggp {
 	private String id;
 	
 	@ManyToOne(cascade={CascadeType.ALL})           
-    @JoinColumn(name="id") 
+    @JoinColumn(name="c_lx")
 	private GgpType lx;
 	
 	@Column(name = "c_ms", nullable = true, length = 900)
