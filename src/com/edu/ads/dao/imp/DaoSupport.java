@@ -33,6 +33,10 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 		return (List<T>)getHibernateTemplate().find(querySql, params);
 	}
 	
+	public List<T> findListForList(String querySql){
+		return (List<T>)getHibernateTemplate().find(querySql);
+	}
+	
 	
 	@Override
 	public String save(T entity) {
@@ -52,8 +56,8 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 
 	@Override
 	public long getCount() {
-		String sql ="select count(" + this.getCountField(this.entityClazz) + ") from "+buildEntityName() ;
-		return getHibernateTemplate().find(sql).size();
+		String sql ="select count(*) from "+buildEntityName();
+		return ((Number)getHibernateTemplate().find(sql).listIterator().next()).longValue();
 	}
 	
 	public PageResult<T> getList(int starIndex,int maxResult,Map<String,Object> params,String orderBy){

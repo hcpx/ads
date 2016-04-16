@@ -1,5 +1,6 @@
 package com.edu.ads.controller.order;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,10 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.edu.ads.bean.order.Order;
 import com.edu.ads.bean.user.User;
 import com.edu.ads.common.page.Page;
 import com.edu.ads.common.page.PageResult;
+import com.edu.ads.common.utils.CommonUtils;
 import com.edu.ads.controller.BaseController;
+import com.edu.ads.service.order.OrderService;
 import com.edu.ads.service.user.UserService;
 
 
@@ -24,6 +28,9 @@ public class OrderController extends BaseController{
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private OrderService orderService;
+	
 	@RequestMapping("/loadOrderManger.do")
 	public String loadOrderManger(){
 		return "/order/orderManger.jsp";
@@ -33,6 +40,13 @@ public class OrderController extends BaseController{
 	public String loadOrderAdd(){
 		return "/order/orderAdd.jsp";
 	}
+	
+	@RequestMapping("/loadOrderUserList.do")
+	public String loadOrderUserList(){
+		System.out.println("xxxx");
+		return "/order/orderUserList.jsp";
+	}
+	
 	
 	@RequestMapping("/loadUserList.do")
 	public String loadUserList(HttpServletRequest request, HttpServletResponse response){
@@ -67,4 +81,35 @@ public class OrderController extends BaseController{
 		
 		return  new Page(current,size);
 	}
+	
+	@RequestMapping("/orderAdd.do")
+	public String  orderAdd(HttpServletRequest request, HttpServletResponse response){
+		Order order = new Order();
+		getBean(order, request);
+		order.setId(CommonUtils.getUUid());
+		//计算订单的价格
+		
+		
+		orderService.save(order);
+		return "";
+	}
+	
+	private double getOrderCount(Order order){
+		//查询出广告牌
+		Date kssj = order.getKssj();
+		Date jssj = order.getJssj();
+		
+		
+		
+		
+		return 0;
+	}
+	
+	@RequestMapping("/listOrder.do")
+	public String listOrder(HttpServletRequest request, HttpServletResponse response){
+		
+		return null;
+	}
+	
+	
 }
