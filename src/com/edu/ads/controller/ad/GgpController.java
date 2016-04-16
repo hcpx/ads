@@ -126,15 +126,15 @@ public class GgpController extends BaseController{
 		if(ggpType!=null&&!"".equals(ggpType)){
 			param.put("lx", ggpType);
 		}
-		String ordery = " order by mc desc";
-		PageResult<GgpType> pageResult = adService.ggTypeList(param, page, ordery);
+		String ordery = " order by jg desc";
+		PageResult<Ggp> pageResult = adService.ggpList(param, page, ordery);
 		double totalCount =pageResult.getTotalRecords();
 		double perPageSize = Integer.valueOf(pageSize);
 		double pageSzie = Math.ceil(totalCount/perPageSize);
 		pageResult.setTotPage((int)pageSzie);
 		pageResult.setPage(page);
 		request.setAttribute("pageResult", pageResult);
-		return "/ad/ggpTypeList.jsp";
+		return "/ad/ggpList.jsp";
 	}
 	
 	@RequestMapping("/loadGgpAdd.do")
@@ -157,7 +157,7 @@ public class GgpController extends BaseController{
 		ggp.setZt(1);
 		ggp.setGgptps(new HashSet<Ggptp>());
 		adService.addggp(ggp);
-		return "/ad/loadGgpManger.do";
+		return "/ggp/loadGgpManger.do";
 	}
 	
 	@RequestMapping("/checkGgpLxCount.do")
@@ -168,5 +168,13 @@ public class GgpController extends BaseController{
 			response.getWriter().write("0");
 		}
 		response.getWriter().flush();
+	}
+	
+	@RequestMapping("/showGgp.do")
+	public String showGgp(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		Ggp ggp = adService.findggp(id);
+		request.setAttribute("ggp",ggp);
+		return "/ad/ggpEedit.jsp";
 	}
 }

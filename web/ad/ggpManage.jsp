@@ -187,8 +187,8 @@
 		return false;
 	}
 
-	function showGgpType(id) {
-		var remote_url = path + "ggp/showGgpType.do?id=" + id;
+	function showGgp(id) {
+		var remote_url = path + "ggp/showGgp.do?id=" + id;
 		$("#modal").modal({
 			backdrop : 'static',
 			keyboard : false,

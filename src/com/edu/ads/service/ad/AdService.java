@@ -98,4 +98,14 @@ public class AdService {
 	public void addggp(Ggp ggp){
 		ggpDao.save(ggp);
 	}
+	
+	
+	/**
+	 * 查找广告牌
+	 * @param id
+	 * @return User
+	 */
+	public Ggp findggp(String id){
+		return ggpDao.find(id);
+	}
 }
