@@ -58,6 +58,11 @@ public class Order {
 	 */
 	@Column(name = "c_xsry", nullable = true, length = 300)
 	private String ggpid;
+
+	/**
+	 * 广告牌单价，冗余字段
+	 */
+	private double ggpdj;
 	
 	/**
 	 * 订单时间
@@ -65,6 +70,8 @@ public class Order {
 	@Column(name = "n_count", nullable = true)
 	private Date ddsj;
 
+
+	
 	public String getId() {
 		return id;
 	}
@@ -135,6 +142,14 @@ public class Order {
 
 	public void setDdsj(Date ddsj) {
 		this.ddsj = ddsj;
+	}
+
+	public double getGgpdj() {
+		return ggpdj;
+	}
+
+	public void setGgpdj(double ggpdj) {
+		this.ggpdj = ggpdj;
 	}
 	
 }

@@ -27,21 +27,19 @@
 <script src="<%=basePath%>js/bootstrap/b3paginator.js"></script>
 
 <script type="text/javascript">
-   var path='<%=basePath%>';
+   var path="<%=basePath%>";
 	function loadOrderAddPage() {
 		var url = path + "order/loadOrderAdd.do";
 		$("#well").load(url);
 	}
-	
+
 	function loadOrderUserList() {
-		var url = path + "order/loadUserList.do";
+		var url = path + "order/loadOrderUserList.do";
 		$("#modal").modal({
 			backdrop : 'static',
 			keyboard : false,
 			show : true,
-			remote : url,
-			width:'800'
-			
+			remote : url
 		});
 		$("#modal").modal("show");
 	}

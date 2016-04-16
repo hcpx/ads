@@ -38,6 +38,7 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 	}
 	
 	
+	
 	@Override
 	public String save(T entity) {
 		 getHibernateTemplate().save(entity);
@@ -168,7 +169,7 @@ public abstract class DaoSupport<T> extends AdsDaoSupport  implements BaseDao<T>
 		String name = entityClazz.getSimpleName();
 		Entity entity = entityClazz.getAnnotation(Entity.class);
 		if (entity.name() != null && !"".equals(entity.name().trim())) {
-			name = entity.name();
+			 name = entity.name();
 		}
 		return name;
 	}
