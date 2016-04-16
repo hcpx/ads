@@ -2,8 +2,10 @@ package com.edu.ads.controller.ad;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.edu.ads.bean.ggp.Ggp;
 import com.edu.ads.bean.ggp.GgpType;
+import com.edu.ads.bean.ggp.Ggptp;
 import com.edu.ads.bean.user.User;
 import com.edu.ads.common.page.Page;
 import com.edu.ads.common.page.PageResult;
@@ -147,6 +150,8 @@ public class GgpController extends BaseController{
 		ggp.setLx(type);
 		ggp.setTjry(user!=null?user.getName():"");
 		ggp.setId(CommonUtils.getUUid());
+		ggp.setZt(1);
+		ggp.setGgptps(new HashSet<Ggptp>());
 		adService.addggp(ggp);
 		return "/ggp/loadGgpTypeManger.do";
 	}
