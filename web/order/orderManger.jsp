@@ -27,21 +27,70 @@
 <script src="<%=basePath%>js/bootstrap/b3paginator.js"></script>
 
 <script type="text/javascript">
-   var path="<%=basePath%>";
+   var path="<%=basePath%>
+	";
 	function loadOrderAddPage() {
 		var url = path + "order/loadOrderAdd.do";
 		$("#well").load(url);
 	}
+	function loadOrderList(page) {
+		var url = path + "order/listOrder.do";
 
-	function loadOrderUserList() {
-		var url = path + "order/loadOrderUserList.do";
-		$("#modal").modal({
-			backdrop : 'static',
-			keyboard : false,
-			show : true,
-			remote : url
+	}
+
+	//初始化分页
+	function initB3paginator() {
+		var data = getParam();
+		//基本分页
+		b3Paginator('pagination', 5, data['currentPage'], data['pageSize'],
+				data['totPage'], function(event, originalEvent, type, page) {
+					var goPage = 1;
+					if (type == "first")
+						goPage = 1;
+					else if (type == "prev")
+						goPage = parseInt(data['currentPage']) - 1;
+					else if (type == "next")
+						goPage = parseInt(data['currentPage']) + 1;
+					else if (type == "last")
+						goPage = data['totPage'];
+					else if (type == "page")
+						goPage = page;
+					//页面跳转方法自行定义
+					loadPage(goPage);
+				}, function(type, page, current) {
+					return null;
+				});
+		$(".page-list").b3paginatorext({
+			onPageSizeChange : function() {
+				loadPage(1);
+			},
+			pagesizeinput : "#pageSize",
+			pagesize : data['pageSize']
 		});
-		$("#modal").modal("show");
+	}
+	
+	function getParam(){
+	     var curp = 1;
+	    var pageSize=5;
+	    var xsrymc = $("#xsrymc").val();
+		var userType = $("#khmc").val();
+		if($("#pageSize").val()){
+		    pageSize = $("#pageSize").val();
+		}
+		var totPage = $("#totPage").val();
+		if(currentPage!=null&&currentPage!=''){
+		   curp = currentPage;
+		}else if($("#curPage").val()){
+		   curp = $("#curPage").val();
+		}
+		var data = {
+		   name:userName,
+		   userType:userType,
+		   currentPage:curp,
+		   pageSize:pageSize,
+		   totPage:totPage
+		};
+		return data;
 	}
 </script>
 
@@ -70,8 +119,12 @@
 				</div>
 				<div class="form-inline well well-sm">
 					<div class="form-group">
-						<input id="name" type="text" class="form-control"
+						<input id="xsrymc" type="text" class="form-control"
 							placeholder="销售人员名称">
+					</div>
+					<div class="form-group">
+						<input id="khmc" type="text" class="form-control"
+							placeholder="客户联系人">
 					</div>
 					<div class="form-group"></div>
 					<span class="btn btn-primary" onclick="loadPage(1)">查询</span> <span
