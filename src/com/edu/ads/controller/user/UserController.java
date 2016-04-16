@@ -112,18 +112,6 @@ public class UserController extends BaseController{
 	}
 	
 	
-	private Page bulidPage(String currentPage,String pageSize){
-		int current = 0;
-		int size = 5;
-		try{
-			 current = Integer.valueOf(currentPage);
-			 size = Integer.valueOf(pageSize);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		return  new Page(current,size);
-	}
 	@RequestMapping("/loadUserAdd.do")
 	public String loadUserAdd(){
 		return "/user/adduse.jsp";
