@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<label class="col-sm-2 control-label">类型描述：</label>
 				<div class="col-md-4">
 					<input type="text" class="form-control" id="ms" name="ms"
-						value="" placeholder="名称"> <label id="msInfo"
+						value="" placeholder="描述"> <label id="msInfo"
 						class="errorInfo">*类型描述不能为空</label>
 				</div>
 			</div>

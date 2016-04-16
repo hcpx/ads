@@ -31,6 +31,7 @@ public class LoginController extends BaseController{
 				request.setAttribute("errormessage", "用户名密码错误");
 				return "/login/login.jsp";
 			}else{
+				request.getSession().setAttribute("user", user);
 				return "/user/loadUserManger.do";
 			}
 		}catch(Exception e){

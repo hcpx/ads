@@ -35,8 +35,8 @@
                 <div class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div class="list-group">
-                            <a id="loadManger" href="<%=path %>/ggp/loadGgpManger.do" class="list-group-item <%="ggplx".equals(target) ? "active" : "" %>">广告牌类型</a>
-                            <a id="loadManger" href="<%=path %>/user/loadUserManger.do" class="list-group-item <%="ggplx".equals(target) ? "active" : "" %>">广告牌</a>
+                            <a id="loadManger" href="<%=path %>/ggp/loadGgpTypeManger.do" class="list-group-item <%="ggplx".equals(target) ? "active" : "" %>">广告牌类型</a>
+                            <a id="loadManger" href="<%=path %>/ggp/loadGgpManger.do" class="list-group-item <%="ggplx".equals(target) ? "active" : "" %>">广告牌</a>
                             <a id="loadManger" href="<%=path %>/user/loadUserManger.do" class="list-group-item <%="ggplx".equals(target) ? "active" : "" %>">广告牌图片</a>
                         </div>
                     </div>
