@@ -55,9 +55,6 @@ public class GgpController extends BaseController{
 		return "/ad/ggpTypeList.jsp";
 	}
 	
-	private Page bulidPage(String currentPage,String pageSize){
-		return  new Page(Integer.valueOf(currentPage),Integer.valueOf(pageSize));
-	}
 	
 	@RequestMapping("/loadGgpTypeAdd.do")
 	public String loadGgpTypeAdd(){

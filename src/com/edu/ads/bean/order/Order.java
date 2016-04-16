@@ -54,11 +54,23 @@ public class Order {
 	private String xsry;
 	
 	/**
+	 * 销售人员名称
+	 */
+	private String ysrymc;
+	
+	
+	
+	/**
 	 * 外键广告牌
 	 */
 	@Column(name = "c_xsry", nullable = true, length = 300)
 	private String ggpid;
 
+	/**
+	 * 广告牌类型名称
+	 */
+	private String ggplxmc;
+	
 	/**
 	 * 广告牌单价，冗余字段
 	 */
@@ -150,6 +162,22 @@ public class Order {
 
 	public void setGgpdj(double ggpdj) {
 		this.ggpdj = ggpdj;
+	}
+
+	public String getYsrymc() {
+		return ysrymc;
+	}
+
+	public void setYsrymc(String ysrymc) {
+		this.ysrymc = ysrymc;
+	}
+
+	public String getGgplxmc() {
+		return ggplxmc;
+	}
+
+	public void setGgplxmc(String ggplxmc) {
+		this.ggplxmc = ggplxmc;
 	}
 	
 }
