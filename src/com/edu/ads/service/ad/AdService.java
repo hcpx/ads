@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.edu.ads.bean.ggp.Ggp;
 import com.edu.ads.bean.ggp.GgpType;
+import com.edu.ads.bean.ggp.Ggptp;
 import com.edu.ads.common.page.Page;
 import com.edu.ads.common.page.PageResult;
 import com.edu.ads.dao.ad.GgpDao;
@@ -22,8 +23,17 @@ public class AdService {
 	private GgpDao ggpDao;
 	@Autowired
 	private GgptpDao ggptpDao;
+	
 	public PageResult<GgpType> ggTypeList(Map<String,Object> params,Page page,String ordery){
 		return ggpTypeDao.getList(page.getStartIndex(), page.getPageLength(), params, ordery);
+	}
+	
+	public PageResult<Ggp> ggpList(Map<String,Object> params,Page page,String ordery){
+		return ggpDao.getList(page.getStartIndex(), page.getPageLength(), params, ordery);
+	}
+	
+	public PageResult<Ggptp> ggptpList(Map<String,Object> params,Page page,String ordery){
+		return ggptpDao.getList(page.getStartIndex(), page.getPageLength(), params, ordery);
 	}
 	
 	/**

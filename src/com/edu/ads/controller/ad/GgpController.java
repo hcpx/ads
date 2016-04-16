@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -111,13 +110,21 @@ public class GgpController extends BaseController{
 	
 	@RequestMapping("/getGgpList.do")
 	public String getGgpList(HttpServletRequest request, HttpServletResponse response){
-		String mc =request.getParameter("mc");
+		String ms =request.getParameter("ms");
+		String useInfo =request.getParameter("useInfo");
+		String ggpType =request.getParameter("ggpType");
 	    String currentPage = request.getParameter("currentPage");
 	    String pageSize = request.getParameter("pageSize");
 	    Page page = bulidPage(currentPage, pageSize);
 		Map<String,Object> param = new HashMap<String,Object>();
-		if(mc!=null&&!"".equals(mc)){
-			param.put("mc", mc);
+		if(ms!=null&&!"".equals(ms)){
+			param.put("ms", ms);
+		}
+		if(useInfo!=null&&!"".equals(useInfo)){
+			param.put("zt", useInfo);
+		}
+		if(ggpType!=null&&!"".equals(ggpType)){
+			param.put("lx", ggpType);
 		}
 		String ordery = " order by mc desc";
 		PageResult<GgpType> pageResult = adService.ggTypeList(param, page, ordery);
@@ -150,7 +157,7 @@ public class GgpController extends BaseController{
 		ggp.setZt(1);
 		ggp.setGgptps(new HashSet<Ggptp>());
 		adService.addggp(ggp);
-		return "/ggp/loadGgpTypeManger.do";
+		return "/ad/loadGgpManger.do";
 	}
 	
 	@RequestMapping("/checkGgpLxCount.do")
