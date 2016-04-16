@@ -27,15 +27,20 @@
 <script src="<%=basePath%>js/bootstrap/b3paginator.js"></script>
 
 <script type="text/javascript">
-   var path="<%=basePath%>
-	";
+$(function(){
+    loadOrderList(1);
+});
+   var path='<%=basePath%>';
 	function loadOrderAddPage() {
 		var url = path + "order/loadOrderAdd.do";
 		$("#well").load(url);
 	}
 	function loadOrderList(page) {
 		var url = path + "order/listOrder.do";
-
+		var data = getParam(page);
+        $("#content").load(url,data,function(re){
+           initB3paginator();
+        });
 	}
 
 	//初始化分页
@@ -56,7 +61,7 @@
 					else if (type == "page")
 						goPage = page;
 					//页面跳转方法自行定义
-					loadPage(goPage);
+					loadOrderList(goPage);
 				}, function(type, page, current) {
 					return null;
 				});
@@ -69,7 +74,7 @@
 		});
 	}
 	
-	function getParam(){
+	function getParam(currentPage){
 	     var curp = 1;
 	    var pageSize=5;
 	    var xsrymc = $("#xsrymc").val();
@@ -84,8 +89,8 @@
 		   curp = $("#curPage").val();
 		}
 		var data = {
-		   name:userName,
-		   userType:userType,
+		   syrymc:xsrymc,
+		   lxmc:userType,
 		   currentPage:curp,
 		   pageSize:pageSize,
 		   totPage:totPage
@@ -127,7 +132,7 @@
 							placeholder="客户联系人">
 					</div>
 					<div class="form-group"></div>
-					<span class="btn btn-primary" onclick="loadPage(1)">查询</span> <span
+					<span class="btn btn-primary" onclick="loadOrderList(1)">查询</span> <span
 						class="btn btn-primary" onclick="loadOrderAddPage()">添加</span>
 				</div>
 			</div>

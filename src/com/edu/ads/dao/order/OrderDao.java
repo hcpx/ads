@@ -16,12 +16,27 @@ import com.edu.ads.dao.imp.DaoSupport;
 public class OrderDao  extends DaoSupport<Order>{
 	
 	
+	public void updateGgpzt(String ggpid,int ggpzt){
+		String sql = "update t_ggp set n_zt =? where c_id=?";
+		getJdbcTemplate().update(sql, new Object[]{ggpzt,ggpid});
+	}
+	
+	
+	public int getCount(Map<String ,Object> params){
+		String sql = bulidCountSql( params);
+		return getJdbcTemplate().queryForInt(sql);
+	}
+	
+	
+	@SuppressWarnings("unchecked")
 	public List<Order> listOrders(Page page,Map<String ,Object> params){
 		
 		String sql = bulidListSql(page, params);
 		return ( List<Order> )getJdbcTemplate().query(sql,  new RowMapper() {
 			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Order order = new Order();
+				order.setKhlxr(rs.getString("c_khlxr"));
+				order.setKhlxrdh(rs.getString("lxrdh"));
 				order.setId(rs.getString("id"));
 				order.setCount(rs.getInt("count"));
 				order.setKssj(rs.getDate("kssj"));
@@ -36,9 +51,29 @@ public class OrderDao  extends DaoSupport<Order>{
 		
 	}
 	
+	private String bulidCountSql(Map<String ,Object> params){
+		StringBuffer sql  = new StringBuffer();
+		sql.append(" select count(*) ");
+		sql.append(" from t_ggdd dd,t_ggp ggp,t_ry ry,t_ggplx ggplx ");
+		sql.append(" where dd.c_ggpid=ggp.c_id and dd.c_xsry=ry.c_id ");
+		sql.append(" and ggp.c_lx=ggplx.c_id ");
+		if(params.containsKey("xsryMc")){
+			sql.append(" and ry.c_name like  ");
+			sql.append("'%").append(params.get("xsryMc"));
+			sql.append("%'");
+		}
+		if(params.containsKey("ggpType")){
+			sql.append(" and ggplx.c_mc like  ");
+			sql.append("'%").append(params.get("ggpType"));
+			sql.append("%'");
+		}
+		return sql.toString();
+	}
+	
+	
 	private String bulidListSql(Page page,Map<String ,Object> params){
 		StringBuffer sql  = new StringBuffer();
-		sql.append(" select dd.c_id id, dd.n_count count , ");
+		sql.append(" select dd.c_khlxr,dd.c_khlxdh lxrdh ,dd.c_id id, dd.n_count count , ");
         sql.append(" dd.d_kssj kssj,dd.d_jssj jssj,dd.d_ddsj ddsj ");
         sql.append(" ,ry.c_name xsrymc,ggplx.c_mc lxmc");
 		sql.append(" from t_ggdd dd,t_ggp ggp,t_ry ry,t_ggplx ggplx ");
@@ -54,7 +89,7 @@ public class OrderDao  extends DaoSupport<Order>{
 			sql.append("'%").append(params.get("ggpType"));
 			sql.append("%'");
 		}
-		sql.append(" order by dd.d_ddsj desc");		
+		sql.append(" order by dd.d_ddsj desc ");		
 		sql.append("limit ").append(page.getStartIndex());
 		sql.append(",").append(page.getPageLength());
 		return sql.toString();
