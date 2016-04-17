@@ -43,7 +43,7 @@
 								Dropdown</span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a href="user/deleteUser.do?id=${order.id}"><span
+							<li><a href="order/deleteOrder.do?id=${order.id}"><span
 									class="glyphicon glyphicon-ok"></span> 删除</a>
 							</li>
 						</ul>

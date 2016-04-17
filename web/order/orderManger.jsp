@@ -38,9 +38,9 @@ $(function(){
 	function loadOrderList(page) {
 		var url = path + "order/listOrder.do";
 		var data = getParam(page);
-        $("#content").load(url,data,function(re){
-           initB3paginator();
-        });
+		$("#content").load(url, data, function(re) {
+			initB3paginator();
+		});
 	}
 
 	//初始化分页
@@ -73,36 +73,103 @@ $(function(){
 			pagesize : data['pageSize']
 		});
 	}
-	
-	function getParam(currentPage){
-	     var curp = 1;
-	    var pageSize=5;
-	    var xsrymc = $("#xsrymc").val();
+
+	function getParam(currentPage) {
+		var curp = 1;
+		var pageSize = 5;
+		var xsrymc = $("#xsrymc").val();
 		var userType = $("#khmc").val();
-		if($("#pageSize").val()){
-		    pageSize = $("#pageSize").val();
+		if ($("#pageSize").val()) {
+			pageSize = $("#pageSize").val();
 		}
 		var totPage = $("#totPage").val();
-		if(currentPage!=null&&currentPage!=''){
-		   curp = currentPage;
-		}else if($("#curPage").val()){
-		   curp = $("#curPage").val();
+		if (currentPage != null && currentPage != '') {
+			curp = currentPage;
+		} else if ($("#curPage").val()) {
+			curp = $("#curPage").val();
 		}
 		var data = {
-		   syrymc:xsrymc,
-		   lxmc:userType,
-		   currentPage:curp,
-		   pageSize:pageSize,
-		   totPage:totPage
+			syrymc : xsrymc,
+			lxmc : userType,
+			currentPage : curp,
+			pageSize : pageSize,
+			totPage : totPage
 		};
 		return data;
+	}
+
+	function loadGgp() {
+		var remote_url = path + "order/loadOrderGgpList.do";
+		$("#modal").modal({
+			backdrop : 'static',
+			keyboard : false,
+			show : true,
+			remote : remote_url
+		});
+		setTimeout(function() {
+			loadPage(1);
+		}, 500);
+		$("#modal").modal("show");
+		$(".modal-content").css("width", "800px");
+	}
+
+	function addOrder(formId) {
+		var khlxr = $("#khlxr").val();
+		if (khlxr == "" || khlxr == null) {
+			$("#khlxrInfo").show();
+			return;
+		} else {
+			$("#khlxrInfo").hide();
+		}
+		var khlxrdh = $("#khlxrdh").val();
+		if (khlxrdh == null || khlxrdh == "") {
+			$("#khlxrdhInfo").show();
+			return;
+		} else {
+			$("#khlxrdhInfo").hide();
+		}
+		var kssj = $("#kssj").val();
+		if (!IsDate(kssj)) {
+	       $("#kssjInfo").show();
+	       return;
+		}else{
+		   $("#kssjInfo").hide();
+		}
+       var jssj = $("#jssj").val();
+       
+       if(!IsDate(jssj)){
+           $("#jssjInfo").show();
+           return;
+       }else{
+           $("#jssjInfo").hide();
+       }
+       var ggpid = $("#ggpid").val();
+       if (ggpid == null || ggpid == "") {
+			$("#ggpidInfo").show();
+			return;
+		} else {
+			$("#ggpidInfo").hide();
+		}
+		
+		$("#"+formId).submit();
+	}
+
+	function IsDate(mystring) {
+	    if(mystring==null||mystring==""){
+	       return false;
+	    }
+		var reg = /^(\d{4})-(\d{2})-(\d{2})$/;
+		if (!reg.test(mystring)) {
+			return false;
+		}
+		return true;
 	}
 </script>
 
 </head>
 
 <body>
-	<div class="container admin-container">
+	<div class="container admin-container"">
 		<!-- 顶部内容 -->
 		<header class="navbar navbar-inverse navbar-fixed-top docs-nav"
 			role="banner">
@@ -132,8 +199,8 @@ $(function(){
 							placeholder="客户联系人">
 					</div>
 					<div class="form-group"></div>
-					<span class="btn btn-primary" onclick="loadOrderList(1)">查询</span> <span
-						class="btn btn-primary" onclick="loadOrderAddPage()">添加</span>
+					<span class="btn btn-primary" onclick="loadOrderList(1)">查询</span>
+					<span class="btn btn-primary" onclick="loadOrderAddPage()">添加</span>
 				</div>
 			</div>
 			<div id="content"></div>
@@ -143,7 +210,8 @@ $(function(){
 
 	<!-- modal -->
 	<div class="modal fade" id="modal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		style="width:1200px;">
 		<div class="modal-dialog">
 			<div class="modal-content" id="modalcontent">
 				<div class="modal-header">
