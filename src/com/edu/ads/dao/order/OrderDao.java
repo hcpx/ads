@@ -54,17 +54,16 @@ public class OrderDao  extends DaoSupport<Order>{
 	private String bulidCountSql(Map<String ,Object> params){
 		StringBuffer sql  = new StringBuffer();
 		sql.append(" select count(*) ");
-		sql.append(" from t_ggdd dd,t_ggp ggp,t_ry ry,t_ggplx ggplx ");
+		sql.append(" from t_ggdd dd,t_ggp ggp,t_ry ry");
 		sql.append(" where dd.c_ggpid=ggp.c_id and dd.c_xsry=ry.c_id ");
-		sql.append(" and ggp.c_lx=ggplx.c_id ");
 		if(params.containsKey("xsryMc")){
 			sql.append(" and ry.c_name like  ");
 			sql.append("'%").append(params.get("xsryMc"));
 			sql.append("%'");
 		}
-		if(params.containsKey("ggpType")){
-			sql.append(" and ggplx.c_mc like  ");
-			sql.append("'%").append(params.get("ggpType"));
+		if(params.containsKey("khlxr")){
+			sql.append(" and dd.c_khlxr like  ");
+			sql.append("'%").append(params.get("khlxr"));
 			sql.append("%'");
 		}
 		if(params.containsKey("userid")){
@@ -80,19 +79,22 @@ public class OrderDao  extends DaoSupport<Order>{
 		StringBuffer sql  = new StringBuffer();
 		sql.append(" select dd.c_khlxr,dd.c_khlxdh lxrdh ,dd.c_id id, dd.n_count count , ");
         sql.append(" dd.d_kssj kssj,dd.d_jssj jssj,dd.d_ddsj ddsj ");
-        sql.append(" ,ry.c_name xsrymc,ggplx.c_mc lxmc");
-		sql.append(" from t_ggdd dd,t_ggp ggp,t_ry ry,t_ggplx ggplx ");
+        sql.append(" ,ry.c_name xsrymc,ggp.c_ms lxmc");
+		sql.append(" from t_ggdd dd,t_ggp ggp,t_ry ry ");
 		sql.append(" where dd.c_ggpid=ggp.c_id and dd.c_xsry=ry.c_id ");
-		sql.append(" and ggp.c_lx=ggplx.c_id ");
 		if(params.containsKey("xsryMc")){
 			sql.append(" and ry.c_name like  ");
 			sql.append("'%").append(params.get("xsryMc"));
 			sql.append("%'");
 		}
-		if(params.containsKey("ggpType")){
-			sql.append(" and ggplx.c_mc like  ");
-			sql.append("'%").append(params.get("ggpType"));
+		if(params.containsKey("khlxr")){
+			sql.append(" and dd.c_khlxr like  ");
+			sql.append("'%").append(params.get("khlxr"));
 			sql.append("%'");
+		}
+		if(params.containsKey("userid")){
+			sql.append(" and dd.c_xsry ='");
+			sql.append(params.get("userid")).append("'");
 		}
 		sql.append(" order by dd.d_ddsj desc ");		
 		sql.append("limit ").append(page.getStartIndex());

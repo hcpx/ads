@@ -18,6 +18,7 @@
 			<th>开始时间</th>
 			<th>结束时间</th>
 			<th>订单价格</th>
+			<th>销售</th>
 			<th>操作</th>
 		</tr>
 		<c:forEach items="${pageResult.records}" var="order" varStatus="s">
@@ -29,13 +30,14 @@
 				<td>${order.kssj }</td>
 				<td>${order.jssj }</td>
 				<td>${order.count }</td>
+				<td>${order.ysrymc }</td>
 				<td>
 					<%--<a href="javascript:void(0);" onclick="showUser('${user.id}')">查看</a>--%>
 					<%-- <a href="javascript:void(0);" onclick="updateUser('${user.id}')">编辑</a>
 				 <a href="user/deleteUser.do?id=${user.id}">删除</a>--%>
 					<div class="btn-group">
 						<button type="button" class="btn btn-default btn-sm"
-							onclick="updateUser('${order.id}')">编辑</button>
+							onclick="loadOrderEdit('${order.id}')">编辑</button>
 						<button type="button"
 							class="btn btn-default btn-sm dropdown-toggle"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

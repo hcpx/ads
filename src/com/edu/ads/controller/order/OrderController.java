@@ -143,7 +143,7 @@ public class OrderController extends BaseController{
 	    	params.put("xsryMc", xsrymc);
 	    }
 	    if(!StringUtils.isEmpty(lxmc)){
-	    	params.put("ggpType", lxmc);
+	    	params.put("khlxr", lxmc);
 	    }
 	    User loginUser = getLoginUser(request);
 	    if(loginUser==null){
@@ -153,6 +153,10 @@ public class OrderController extends BaseController{
 	    pageResult.setRecords(orderService.listOrders( page, params));
 	    pageResult.setPage(page);
 	    pageResult.setTotalRecords(orderService.getCount(params));
+	    double totalCount =pageResult.getTotalRecords();
+		double perPageSize = page.getPageLength();
+		double pageSzie = Math.ceil(totalCount/perPageSize);
+		pageResult.setTotPage((int)pageSzie);
 		request.setAttribute("pageResult", pageResult);
 		return "/order/orderList.jsp";
 	}
@@ -161,6 +165,7 @@ public class OrderController extends BaseController{
 	public String deleteOrder(HttpServletRequest request, HttpServletResponse response){
 		String id = request.getParameter("id");
 		orderService.delet(id);
+		
 		return "/order/loadOrderManger.do";
 	}
 	
@@ -168,6 +173,15 @@ public class OrderController extends BaseController{
 	public String updateOrder(HttpServletRequest request, HttpServletResponse response){
 		Order order = new Order();
 		getBean(order, request);
+		try{
+			SimpleDateFormat simp = new SimpleDateFormat("yyyy-MM-dd");
+			String kssj = request.getParameter("kssj");
+			String jssj = request.getParameter("jssj");
+			order.setKssj(simp.parse(kssj));
+			order.setJssj(simp.parse(jssj));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		Order oldOrder = orderService.find(order.getId());
 		oldOrder.setCount(getOrderCount(order));
 		oldOrder.setKhlxr(order.getKhlxr());
@@ -183,8 +197,22 @@ public class OrderController extends BaseController{
 		oldOrder.setGgpid(order.getGgpid());
 	    //修改新的广告牌状态
 		orderService.updateGgpzt(order.getGgpid(), 2);
+		orderService.update(oldOrder);
 		return "/order/loadOrderManger.do";
 		
+	}
+	
+	@RequestMapping("/getOrder.do")
+	public String getOrder(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		Order order = orderService.find(id);
+		//获取广告牌
+		String ggpId  = order.getGgpid();
+		Ggp ggp = adService.findggp(ggpId);
+		order.setGgplxmc(ggp.getMs());
+		order.setGgpdj(ggp.getJg());
+		request.setAttribute("order", order);
+		return "/order/orderEdit.jsp";
 	}
 	
 }

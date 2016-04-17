@@ -25,6 +25,10 @@ public class OrderService {
 		return orderDao.listOrders(page, params);
 	}
 	
+	public void update(Order o){
+		orderDao.update(o);
+	}
+	
 	public Order find(String id){
 		return orderDao.find(id);
 	}

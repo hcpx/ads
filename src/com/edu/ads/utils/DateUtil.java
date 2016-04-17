@@ -11,7 +11,6 @@ public class DateUtil {
 	*字符串的日期格式的计算 
 	*/  
 	    public static int daysBetween(Date smdate,Date bdate) throws ParseException{  
-	        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");  
 	        Calendar cal = Calendar.getInstance();    
 	        cal.setTime(smdate);    
 	        long time1 = cal.getTimeInMillis();                 

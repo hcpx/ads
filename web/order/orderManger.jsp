@@ -164,6 +164,14 @@ $(function(){
 		}
 		return true;
 	}
+	
+	function loadOrderEdit(id){
+	    var remote_url = path + "order/getOrder.do";
+	    $("#well").load(remote_url,{id:id});
+	    
+	}
+	
+
 </script>
 
 </head>
