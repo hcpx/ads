@@ -16,7 +16,7 @@
     var path = "<%=path %>";
     function loadWeekRankData(){
         var data = {pageSize: "7"};
-        var url = path + "/portal/util/week_rank_util.jsp?r="+Math.random();
+        var url = path + "/portal/loadAdsWeekData.do?r="+Math.random();
         $("#week_data").load(url,data,function(res){
         });
     }

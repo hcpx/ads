@@ -30,7 +30,7 @@
     loadFocusNewData();
     function loadAdsRankData(){
         var data = {};
-        var url = path + "/portal/util/ads_rank_util.jsp";
+        var url = path + "/portal/loadAdsRank.do";
         $("#dynamic_data").load(url,data,function(res){
 
         });
