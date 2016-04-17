@@ -67,6 +67,11 @@ public class OrderDao  extends DaoSupport<Order>{
 			sql.append("'%").append(params.get("ggpType"));
 			sql.append("%'");
 		}
+		if(params.containsKey("userid")){
+			sql.append(" and dd.c_xsry ='");
+			sql.append(params.get("userid")).append("'");
+		}
+		
 		return sql.toString();
 	}
 	

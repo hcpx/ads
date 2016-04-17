@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.GenericGenerator;
 
 
 @Table(name="t_ggdd")
@@ -15,7 +18,7 @@ import javax.persistence.Table;
 public class Order {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GenericGenerator(name="hibernate-uuid",strategy="uuid")
 	@Column(name = "c_id", nullable = false, length = 32)
 	private String id;
 	
@@ -56,6 +59,7 @@ public class Order {
 	/**
 	 * 销售人员名称
 	 */
+	@Transient
 	private String ysrymc;
 	
 	
@@ -69,11 +73,13 @@ public class Order {
 	/**
 	 * 广告牌类型名称
 	 */
+	@Transient
 	private String ggplxmc;
 	
 	/**
 	 * 广告牌单价，冗余字段
 	 */
+	@Transient
 	private double ggpdj;
 	
 	/**

@@ -6,7 +6,7 @@
 			+ path + "/";
 %>
 
-<form method="post" class="form-horizontal" action="user/saveUser.do"
+<form method="post" class="form-horizontal" action="order/orderAdd.do"
 	id="orderAddForm">
 	<div class="modal-body">
 		<div class="row form-group">
@@ -44,21 +44,23 @@
 			<div class="col-md-6">
 				<input type="text" class="form-control" id="jssj" name="jssj"
 				 placeholder="结束时间"> <label id="jssjInfo"
-					class="errorInfo">*结束时间</label>
+					class="errorInfo">*结束时间不能为空</label>
 			</div>
 		</div>
 		<div class="form-group">
 		    <label class="col-sm-4 control-label">广告牌：</label>
 			<div class="col-md-6">
-				<input type=""text"" class="form-control" id="ggpid" name="ggpid"
-					value="" placeholder="广告牌"> <label id="ggpidInfo"
-					class="errorInfo">*请选择销售人员</label>
+				<input type=""text"" class="form-control" id="ggpmc" name="ggpid"
+					value="" placeholder="广告牌" onclick="loadGgp()"> <label id="ggpidInfo"
+					class="errorInfo">*请选择广告牌</label>
+					<input type="hidden" name="ggpdj" id="ggpdj">
+					<input type="hidden" name="ggpid" id="ggpid">
 			</div>
 		</div>
 	</div>
 	<div class="modal-footer">
 		<button id="subnitBtn" class="btn btn-primary pull-center" type="button"
-			onclick="submitUserAdd('userAddForm',true)">提交</button>
+			onclick="addOrder('orderAddForm')">提交</button>
 	</div>
 </form>
 

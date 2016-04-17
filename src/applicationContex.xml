@@ -73,6 +73,7 @@ xmlns:aop="http://www.springframework.org/schema/aop" >
 				<value>com.edu.ads.bean.ggp.Ggp</value>
 				<value>com.edu.ads.bean.ggp.Ggptp</value>
 				<value>com.edu.ads.bean.user.User</value>
+				<value>com.edu.ads.bean.order.Order</value>
 			</list>
 		</property>
 	</bean>

@@ -25,6 +25,10 @@ public class OrderService {
 		return orderDao.listOrders(page, params);
 	}
 	
+	public Order find(String id){
+		return orderDao.find(id);
+	}
+	
 	public void save(Order o){
 		orderDao.save(o);
 	}
@@ -36,4 +40,12 @@ public class OrderService {
 	public void updateGgpzt(String ggpid,int ggpzt){
 		 orderDao.updateGgpzt(ggpid, ggpzt);
 	}
+	
+	public void delet(String id){
+		Order order = orderDao.find(id);
+		orderDao.delete(order);
+		//把广告牌子变为可用
+		orderDao.updateGgpzt(order.getGgpid(), 1);
+	}
+	
 }
