@@ -1,6 +1,7 @@
 package com.edu.ads.controller.user;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +51,7 @@ public class UserController extends BaseController{
 		User user = new User();
 		getBean(user, request);
 		user.setId(CommonUtils.getUUid());
+		user.setCreateDate(new Date());
 		userService.addUser(user);
 		return "/user/loadUserManger.do";
 	}
@@ -99,7 +101,7 @@ public class UserController extends BaseController{
 				e.printStackTrace();
 			}
 		}
-		String ordery = " order by name desc";
+		String ordery = " order by createDate desc";
 		PageResult<User> pageResult = userService.list(param, page, ordery);
 		double totalCount =pageResult.getTotalRecords();
 		double perPageSize = page.getPageLength();

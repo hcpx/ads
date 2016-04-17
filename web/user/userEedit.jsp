@@ -13,7 +13,7 @@
 		</button>
 		<h4 class="modal-title">人员信息</h4>
 	</div>
-	<form  method="post" class="form-horizontal" id="userUpdateForm">
+	<form  method="post" class="form-horizontal" id="userUpdateForm" action="user/updateUser.do">
 		<div class="modal-body">
 			<div class="row form-group">
 				<div class="col-md-3 control-label">

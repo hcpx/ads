@@ -1,6 +1,8 @@
 package com.edu.ads.bean.user;
 
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,6 +33,9 @@ public class User {
 	
 	@Column(name = "c_password", nullable = false, length = 300 )
 	private String password;
+	
+	@Column(name = "d_createDate", nullable = false, length = 300 )
+	private Date createDate;
 	
 	public String getId() {
 		return id;
@@ -70,6 +75,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 	
 }
