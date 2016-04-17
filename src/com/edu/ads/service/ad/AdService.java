@@ -126,4 +126,23 @@ public class AdService {
 	public void deleteGgp(Ggp ggp) {
 		ggpDao.delete(ggp);
 	}
+	
+	/**
+	 * 找到所有广告牌总条数
+	 * @param id
+	 * @return int
+	 */
+	public int getAllGgpCount() {
+		int count=(int)ggpDao.getCount();
+		return count;
+	}
+	
+	/**
+	 * 找到所有广告牌
+	 * @param id
+	 * @return List<GgpType>
+	 */
+	public List<Ggp> getAllGgp() {
+		return ggpDao.getAllgg();
+	}
 }

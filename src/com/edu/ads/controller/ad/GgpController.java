@@ -1,5 +1,6 @@
 package com.edu.ads.controller.ad;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.ads.bean.ggp.Ggp;
 import com.edu.ads.bean.ggp.GgpType;
@@ -204,4 +208,127 @@ public class GgpController extends BaseController{
 		adService.deleteGgp(Ggp);
 		return "/ggp/loadGgpManger.do";
 	}
+	
+	/*=======================================广告牌图片==============================================*/
+	
+	@RequestMapping("/loadGgpTpManger.do")
+	public String loadGgpTpManger(HttpServletRequest request, HttpServletResponse response){
+		List<GgpType> ggpTypeList=adService.getAllGgType();
+		request.setAttribute("ggpTypeList", ggpTypeList);
+		return "/ad/ggpTpManage.jsp";
+	}
+	
+	@RequestMapping("/getGgpTpList.do")
+	public String getGgpTpList(HttpServletRequest request, HttpServletResponse response){
+		String ms =request.getParameter("ms");
+		String useInfo =request.getParameter("useInfo");
+		String ggpType =request.getParameter("ggpType");
+	    String currentPage = request.getParameter("currentPage");
+	    String pageSize = request.getParameter("pageSize");
+	    Page page = bulidPage(currentPage, pageSize);
+		Map<String,Object> param = new HashMap<String,Object>();
+		if(ms!=null&&!"".equals(ms)){
+			param.put("ms", ms);
+		}
+		if(useInfo!=null&&!"".equals(useInfo)){
+			param.put("zt", Integer.valueOf(useInfo));
+		}
+		if(ggpType!=null&&!"".equals(ggpType)){
+			param.put("lx",adService.findggpType(ggpType));
+		}
+		String ordery = " order by jg desc";
+		PageResult<Ggp> pageResult = adService.ggpList(param, page, ordery);
+		double totalCount =pageResult.getTotalRecords();
+		double perPageSize = Integer.valueOf(pageSize);
+		double pageSzie = Math.ceil(totalCount/perPageSize);
+		pageResult.setTotPage((int)pageSzie);
+		pageResult.setPage(page);
+		request.setAttribute("pageResult", pageResult);
+		return "/ad/ggpList.jsp";
+	}
+	
+	@RequestMapping("/loadGgpTpAdd.do")
+	public String loadGgpTpAdd(HttpServletRequest request, HttpServletResponse response){
+		List<Ggp> ggpList=adService.getAllGgp();
+		request.setAttribute("ggpList", ggpList);
+		return "/ad/addGgpTp.jsp";
+	}
+	
+	@RequestMapping("/saveGgpTp.do")
+	public String saveGgpTp(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String lx =request.getParameter("lx");
+		User user=(User)request.getSession().getAttribute("user");
+		Ggp ggp = new Ggp();
+		getBean(ggp, request);
+		GgpType type=adService.findggpType(lx);
+		ggp.setLx(type);
+		ggp.setTjry(user!=null?user.getName():"");
+		ggp.setId(CommonUtils.getUUid());
+		ggp.setZt(1);
+		ggp.setGgptps(new HashSet<Ggptp>());
+		adService.addggp(ggp);
+		return "/ggp/loadGgpManger.do";
+	}
+	
+	@RequestMapping("/checkGgpTpLxCount.do")
+	public void checkGgpTpLxCount(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		if(adService.getAllGgpCount()==0){
+			response.getWriter().write("1");
+		}else{
+			response.getWriter().write("0");
+		}
+		response.getWriter().flush();
+	}
+	
+	@RequestMapping("/showGgpTp.do")
+	public String showGgpTp(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		Ggp ggp = adService.findggp(id);
+		List<GgpType> ggpTypeList=adService.getAllGgType();
+		request.setAttribute("ggpTypeList", ggpTypeList);
+		request.setAttribute("ggp",ggp);
+		return "/ad/ggpEedit.jsp";
+	}
+	
+	@RequestMapping("/updateGgpTp.do")
+	public String updateGgpTp(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		String lx = request.getParameter("lx");
+		String ms = request.getParameter("updatems");
+		String zt = request.getParameter("zt");
+		String updatejg = request.getParameter("updatejg");
+		Ggp Ggp = adService.findggp(id);
+		GgpType type=adService.findggpType(lx);
+		Ggp.setLx(type);
+		Ggp.setMs(ms);
+		Ggp.setZt(Integer.valueOf(zt));
+		Ggp.setJg(Double.valueOf(updatejg));
+		adService.upGgp(Ggp);
+		return "/ggp/loadGgpManger.do";
+	}
+	
+	@RequestMapping("/deleteGgpTp.do")
+	public String deleteGgpTp(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		Ggp Ggp = adService.findggp(id);
+		adService.deleteGgp(Ggp);
+		return "/ggp/loadGgpManger.do";
+	}
+	
+	@RequestMapping("/updateImage.do")  
+    public void uploadFile(HttpServletResponse response,HttpServletRequest request,@RequestParam(value="file", required=false) MultipartFile file) throws IOException{  
+        byte[] bytes = file.getBytes();  
+        System.out.println(file.getOriginalFilename());  
+        String uploadDir = request.getRealPath("/")+"upload";  
+        File dirPath = new File(uploadDir);  
+        if (!dirPath.exists()) {  
+            dirPath.mkdirs();  
+        }  
+        String sep = System.getProperty("file.separator");  
+        File uploadedFile = new File(uploadDir + sep  
+                + file.getOriginalFilename());  
+        FileCopyUtils.copy(bytes, uploadedFile);  
+        String msg = "true";
+        response.getWriter().write(msg);  
+    }  
 }
