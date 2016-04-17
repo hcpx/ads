@@ -50,9 +50,6 @@
 	    var pageSize=5;
 	    var userName = $("#name").val();
 		var userType = $("#userType").val();
-		if(userType==null||userType==""){
-		userType =1;
-		}
 		if($("#pageSize").val()){
 		    pageSize = $("#pageSize").val();
 		}
@@ -125,14 +122,14 @@ function checkUserNameExist(){
 }
 
 function submitUserAdd(eleid,ischeck){
-    var name= $("#name").val();
+    var name= $("#mc").val();
     if(name==null||name==""){
        $("#nameInfo").show();
        return;
     }else{
        $("#nameInfo").hide();
     }
-    var userType=$("#userType").val();
+    var userType=$("#userlx").val();
     if(userType==null||userType==""){
        $("#typeInfo").show();
        return;

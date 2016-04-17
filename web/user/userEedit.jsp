@@ -13,17 +13,17 @@
 		</button>
 		<h4 class="modal-title">人员信息</h4>
 	</div>
-	<form  method="post" class="form-horizontal" >
+	<form  method="post" class="form-horizontal" id="userUpdateForm">
 		<div class="modal-body">
 			<div class="row form-group">
 				<div class="col-md-3 control-label">
 					<label>姓名：</label>
 				</div>
 				<div class="col-md-7 controls">
-					<input type="text" class="form-control" id="name" name="name"
+					<input type="text" class="form-control" id="mc" name="name"
 						   value="${user.name }"> <label id="nameInfo"
-														 class="errorInfo">*名称不能为空</label> <input type="hidden" name="id"
-																								  value="${user.id }">
+														 class="errorInfo">*名称不能为空</label>
+					<input type="hidden" name="id"  value="${user.id }">
 				</div>
 			</div>
 			<div class="row form-group">
@@ -31,7 +31,7 @@
 					<label>人员类型：</label>
 				</div>
 				<div class="col-md-7 controls">
-					<select class="form-control" id="userType" name="type">
+					<select class="form-control" id="userlx" name="type">
 						<option value="1"
 								<c:if test="${user.type==1}">
 									selected='selected'

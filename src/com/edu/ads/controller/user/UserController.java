@@ -91,14 +91,13 @@ public class UserController extends BaseController{
 		if(name!=null&&!"".equals(name)){
 			param.put("name", name);
 		}
-		int type = 1;
 		if(usertype!=null&&!"".equals(usertype)){
 			try{
-				type =  Integer.valueOf(usertype);
+				int type =  Integer.valueOf(usertype);
+				param.put("type", type);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			param.put("type", type);
 		}
 		String ordery = " order by name desc";
 		PageResult<User> pageResult = userService.list(param, page, ordery);

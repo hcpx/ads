@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label>姓名：</label>
 				</div>
 				<div class="col-md-4 controls">
-					<input type="text" class="form-control" id="name" name="name"
+					<input type="text" class="form-control" id="mc" name="name"
 						value="" placeholder="名称"> <label id="nameInfo"
 						class="errorInfo">*名称不能为空</label>
 				</div>
@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="col-md-4 controls">
 					<div class="input-group">
-						<select class="form-control" id="userType" name="type">
+						<select class="form-control" id="userlx" name="type">
 							<option value="1">管理员</option>
 							<option value="2">销售人员</option>
 						</select> <label id="typeInfo" class="errorInfo">*用戶类型不能为空</label>
